@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 11. März 2020 10:55 von Leander Jedamus
+# modifiziert Mittwoch, 11. März 2020 10:59 von Leander Jedamus
 # modifiziert Dienstag, 10. März 2020 11:32 von Leander Jedamus
 
 from __future__ import print_function
@@ -27,7 +27,8 @@ stdout_handler.setFormatter(formatter)
 log = logging.getLogger()
 log.addHandler(file_handler)
 log.addHandler(stdout_handler)
-log.setLevel(logging.DEBUG)
+# log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 def mat_mul(s_vector,z_vector,n):
   power = 2**n
@@ -80,9 +81,10 @@ if inp.isdigit():
         vec_s[i-1] += "0"
     log.debug("vec_s[{i:d}] = {vec_s:s}".format(i=i,vec_s=vec_s[i-1]))
   log.debug("vector = {vector:s}".format(vector=str(vector)))
-  mat.append(mat_mul(vector[3],vector[2],n))
-  log.debug("mat[0] = {mat:s}".format(mat=str(mat[0])))
 
+  # bra und ket einlesen
+  mat.append(mat_mul(vector[3],vector[2],n))
+  log.info("mat[0] = {mat:s}".format(mat=str(mat[0])))
 
 # vim:ai sw=2 sts=4 expandtab
 
