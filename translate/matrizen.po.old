@@ -1,0 +1,70 @@
+# matrizen.
+# Copyright (C) 2020 Leander Jedamus
+# This file is distributed under the same license as the matrizen package.
+# ljedamus@web.de, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: matrizen 1.1\n"
+"Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
+"POT-Creation-Date: 2020-03-14 14:00+0100\n"
+"PO-Revision-Date: 2020-03-14 14:00+0100\n"
+"Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
+"Language-Team: Leander Jedamus <ljedamus@web.de>\n"
+"Language: de en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:59
+msgid "Create a matrix from input and output bits"
+msgstr ""
+
+#: main.py:61
+msgid "select file"
+msgstr ""
+
+#: main.py:69
+msgid "input from \"{filename:s}\"."
+msgstr ""
+
+#: matrix_aus_datei.py:61
+msgid "found n"
+msgstr ""
+
+#: matrix_aus_datei.py:82
+msgid "n is not a decimal"
+msgstr ""
+
+#: matrix_aus_datei.py:86
+msgid "found bits"
+msgstr ""
+
+#: matrix_aus_datei.py:101
+#, python-brace-format
+msgid "index of lbits = {i:d}"
+msgstr ""
+
+#: matrix_aus_datei.py:105
+#, python-brace-format
+msgid "index of rbits = {i:d}"
+msgstr ""
+
+#: matrix_aus_datei.py:109
+#, python-brace-format
+msgid "bits not found in line {line_no:d}"
+msgstr ""
+
+#: matrix_aus_datei.py:113
+#, python-brace-format
+msgid "bits double in line {line_no:d}"
+msgstr ""
+
+#: matrix_aus_datei.py:132
+msgid "too many bits in file"
+msgstr ""
+
+#: matrix_aus_datei.py:136
+msgid "not enough bits in file"
+msgstr ""
