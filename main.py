@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
-# modifiziert Samstag, 14. März 2020 13:05 von Leander Jedamus
+# modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
 
 from __future__ import print_function
 from argparse import ArgumentParser
@@ -15,6 +15,7 @@ import atexit
 import time
 import log
 import matrix_aus_datei as datei
+import matrix_interaktiv as interaktiv
 
 home = os.environ["HOME"]
 user = os.environ["USER"]
@@ -56,11 +57,18 @@ except IOError:
 if __name__ == '__main__':
   logger = logging.getLogger(__name__)
   parser = ArgumentParser(description = _("Create a matrix from input and output bits"))
-  parser.add_argument("-f","--file", dest="filename", default="matrix_cnot.dat",
+  parser.add_argument("-f","--file", dest="filename", default="",
                       help=_("select file"))
   filename = parser.parse_args().filename
-  logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
-  matrix = datei.matrix_aus_datei(filename)
+  if(filename == ""):
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug("interaktiv")
+    matrix = interaktiv.matrix_interaktiv()
+  else:
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
+    matrix = datei.matrix_aus_datei(filename)
+  print("matrix = {matrix:s}".format(matrix=matrix))
 
 # vim:ai sw=2 sts=4 expandtab
 
