@@ -2,6 +2,8 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
+# modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
+# modified Saturday, 14. March 2020 14:13 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:25 von Leander Jedamus
 # modifiziert Mittwoch, 11. März 2020 17:35 von Leander Jedamus
 # modifiziert Dienstag, 10. März 2020 11:32 von Leander Jedamus
@@ -9,14 +11,25 @@
 from __future__ import print_function
 import logging
 import matrizen
-
 import sys
+import os
+import gettext
+
 if int(sys.version_info.major) < 3:
   my_input = raw_input
 else:
   my_input = input
 
 logger = logging.getLogger(__name__)
+
+scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
+try:
+  trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
+  trans.install(unicode=True)
+except IOError:
+  logger.error("Fehler in gettext")
+  def _(s):
+    return s
 
 """
 log_path_and_filename = os.path.join("/tmp","matrizen.log")
@@ -61,7 +74,7 @@ def matrix_interaktiv():
         if bra[i] != "":
           print(bra[i])
 
-      j = my_input('Welches Bra (Eingangsvektor):')
+      j = my_input(_('Wich bra (input vector):'))
       if j.isdigit():
         j = int(j)
         bra[j-1] = ""
@@ -84,7 +97,7 @@ def matrix_interaktiv():
           if ket[i] != "":
             print(ket[i])
 
-        k = my_input('Welches Ket (Ausgangsvektor):')
+        k = my_input(_('Wich Ket (output vector):'))
         if k.isdigit():
           k = int(k)
           ket[k-1] = ""
