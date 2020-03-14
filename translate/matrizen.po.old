@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-03-14 14:00+0100\n"
-"PO-Revision-Date: 2020-03-14 14:00+0100\n"
+"POT-Creation-Date: 2020-03-14 14:13+0100\n"
+"PO-Revision-Date: 2020-03-14 14:13+0100\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -67,4 +67,12 @@ msgstr ""
 
 #: matrix_aus_datei.py:136
 msgid "not enough bits in file"
+msgstr ""
+
+#: matrix_interaktiv.py:74
+msgid "Wich bra (input vector):"
+msgstr ""
+
+#: matrix_interaktiv.py:97
+msgid "Wich Ket (output vector):"
 msgstr ""
