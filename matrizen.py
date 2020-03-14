@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 08:23 (C) 2020 von Leander Jedamus
-# modifiziert Samstag, 14. März 2020 08:31 von Leander Jedamus
+# modifiziert Samstag, 14. März 2020 08:44 von Leander Jedamus
 
 from __future__ import print_function
 import logging
@@ -50,7 +50,30 @@ def bits_and_vector(n):
   if logger.isEnabledFor(logging.DEBUG):
     logger.debug("vector = {vector:s}".format(vector=str(vector)))
   ret = (bits,vector)
-  return ret
+  return(ret)
+
+def mat_init(n):
+  power = 2**n
+  mat = [];
+  for i in range(power):
+    mat.append([])
+
+  for i in range(power):
+    for j in range(power):
+      mat[i-1].append(0)
+
+  return(mat)
+
+def mat_mul(s_vector,z_vector,n):
+
+  mat = mat_init(n)
+  power = 2**n
+
+  for i in range(power):
+    for j in range(power):
+      mat[i-1][j-1]= s_vector[i-1]*z_vector[j-1]
+
+  return(mat)
 
 # vim:ai sw=2 sts=4 expandtab
 
