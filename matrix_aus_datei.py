@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Samstag, 14. März 2020 09:26 von Leander Jedamus
+# modifiziert Samstag, 14. März 2020 09:30 von Leander Jedamus
 
 from __future__ import print_function
 import re
@@ -25,7 +25,7 @@ logger.addHandler(stdout_handler)
 logger.setLevel(logging.INFO)
 
 
-datei = open("matrix_cnot.dat","r")
+datei = open("matrix_xor.dat","r")
 reg_comment = re.compile(r"^#.*")
 reg_empty = re.compile(r"^$")
 reg_n = re.compile(r"n = (\d+)")
