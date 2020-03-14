@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Samstag, 14. März 2020 08:33 von Leander Jedamus
+# modifiziert Samstag, 14. März 2020 08:41 von Leander Jedamus
 
 from __future__ import print_function
 import re
@@ -55,6 +55,7 @@ for line in datei:
         n = int(n)
         has_n = True
         logger.debug("n = " + str(n))
+
         (bits,vector) = matrizen.bits_and_vector(n)
         logger.debug("bits = " + str(bits))
         logger.debug("vector = " + str(vector))
