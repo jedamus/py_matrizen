@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Samstag, 14. März 2020 08:14 von Leander Jedamus
+# modifiziert Samstag, 14. März 2020 08:17 von Leander Jedamus
 
 from __future__ import print_function
 import re
@@ -48,13 +48,13 @@ for line in datei:
     if (re.match(reg_n,line)):
       if log.isEnabledFor(logging.DEBUG):
         log.debug("n gefunden")
-        n = re.sub(reg_n,"\g<1>",line)
-        if n.isdigit():
-          n = int(n)
-          has_n = True
-          log.debug("n = " + str(n))
-        else:
-          log.error("n is not a decimal")
+      n = re.sub(reg_n,"\g<1>",line)
+      if n.isdigit():
+        n = int(n)
+        has_n = True
+        log.debug("n = " + str(n))
+      else:
+        log.fatal("n is not a decimal")
 datei.close()
 
 # vim:ai sw=2 sts=4 expandtab
