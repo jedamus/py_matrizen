@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
 # modified Sunday, 15. March 2020 06:55 by Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 06:53 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:59 von Leander Jedamus
@@ -141,7 +142,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
       logger.error(_("not enough bits in file"))
     exit(-1)
 
-  logger.info("matrix = {matrix:s}".format(matrix=str(matrix)))
+  logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
