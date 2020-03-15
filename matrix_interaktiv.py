@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
+# modifiziert Sonntag, 15. März 2020 14:11 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
 # modified Saturday, 14. March 2020 14:13 by Leander Jedamus
@@ -47,18 +48,40 @@ log.addHandler(stdout_handler)
 log.setLevel(logging.INFO)
 """
 
-def matrix_interaktiv():
+def zahleneingabe(n1,n2,ausgabe):
   while(True):
-    inp = my_input('n = ')
+    try:
+      inp = my_input(ausgabe)
+    except KeyboardInterrupt:
+      print()
+      exit(-1)
     if not inp.isdigit():
       print(_("Wrong input!"))
     else:
       n = int(inp)
-      if (n>1):
+      if ((n >= n1) and (n <= n2)):
         break
       else:
         print(_("Wrong input!"))
+  return(n)
 
+def vektorabfrage(power,bits,ausgabe):
+  while(True):
+    for i in range(power):
+      if bits[i] != "":
+        print(bits[i])
+
+    j = zahleneingabe(1,power,ausgabe)
+    if bits[j-1] == "":
+      print(_("Wrong input!"))
+    else:
+      bits[j-1] = ""
+      break
+
+  return(j)
+
+def matrix_interaktiv():
+  n = zahleneingabe(2,13,"n = ")
   (bits, vector) = matrizen.bits_and_vector(n)
   power = 2**n
   matrix = []
@@ -79,66 +102,37 @@ def matrix_interaktiv():
     logger.debug("bra_ind = {bra_ind:s}".format(bra_ind=str(bra_ind)))
   bras = power
   while(bras > 0):
+    j = vektorabfrage(power,bra,_('Wich bra (input vector):'))
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug("bits = {bits:s}".format(bits=str(bits)))
+      logger.debug("bits[{index:d}] = {bits:s}".format(index=bra_ind[j-1],bits=bits[bra_ind[j-1]]))
+    bras -= 1
+    s_vector = vector[bra_ind[j-1]]
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug("s_vector = {s_vector:s}".format(s_vector=s_vector))
+
+    ket = []
+    ket_ind = []
     for i in range(power):
-      if bra[i] != "":
-        print(bra[i])
+      ket.append("{i:d}. {ket:s}".format(i=i+1,ket=bits[i]))
+      ket_ind.append(i)
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug("ket_ind = {ket_ind:s}".format(ket_ind=str(ket_ind)))
 
-    j = my_input(_('Wich bra (input vector):'))
-    if not j.isdigit():
-      print(_("Wrong input!"))
-    else: 
-      j = int(j)
-      if (j<=0) or (j>power):
-        print(_("Wrong input!"))
-      else:
-        if bra[j-1] == "":
-          print(_("Wrong input!"))
-        else:
-          bra[j-1] = ""
-          if logger.isEnabledFor(logging.DEBUG):
-            logger.debug("bits = {bits:s}".format(bits=str(bits)))
-            logger.debug("bits[{index:d}] = {bits:s}".format(index=bra_ind[j-1],bits=bits[bra_ind[j-1]]))
-          bras -= 1
-          s_vector = vector[bra_ind[j-1]]
-          if logger.isEnabledFor(logging.DEBUG):
-            logger.debug("{s_vector:s}".format(s_vector=s_vector))
+    k = vektorabfrage(power,ket,_('Wich Ket (output vector):'))
+    z_vector = vector[ket_ind[k-1]]
+    mat = matrizen.mat_mul(s_vector,z_vector,n)
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug("bits = {bits:s}".format(bits=str(bits)))
+      logger.debug("bits[{index:d}] = {bits:s}".format(index=ket_ind[k-1],bits=bits[ket_ind[k-1]]))
+      logger.debug("{z_vector:s}".format(z_vector=z_vector))
+      logger.debug("mat = {mat:s}".format(mat=str(mat)))
 
-          ket = []
-          ket_ind = []
-          for i in range(power):
-            ket.append("{i:d}. {ket:s}".format(i=i+1,ket=bits[i]))
-            ket_ind.append(i)
-          if logger.isEnabledFor(logging.DEBUG):
-            logger.debug("ket_ind = {ket_ind:s}".format(ket_ind=str(ket_ind)))
-
-          while(True):
-            for i in range(power):
-              if ket[i] != "":
-                print(ket[i])
-
-            k = my_input(_('Wich Ket (output vector):'))
-            if not k.isdigit():
-              print(_("Wrong input!"))
-            else:
-              k = int(k)
-              if (k<=0) or (k>power):
-                print(_("Wrong input!"))
-              else:
-                ket[k-1] = ""
-                z_vector = vector[ket_ind[k-1]]
-                mat = matrizen.mat_mul(s_vector,z_vector,n)
-                if logger.isEnabledFor(logging.DEBUG):
-                  logger.debug("bits = {bits:s}".format(bits=str(bits)))
-                  logger.debug("bits[{index:d}] = {bits:s}".format(index=ket_ind[k-1],bits=bits[ket_ind[k-1]]))
-                  logger.debug("{z_vector:s}".format(z_vector=z_vector))
-                  logger.debug("mat = {mat:s}".format(mat=str(mat)))
-                break
-
-          for i in range(power):
-            for j in range(power):
-              matrix[i][j] += mat[i][j]
+    for i in range(power):
+      for j in range(power):
+        matrix[i][j] += mat[i][j]
               
-  logger.info("matrix = {matrix:s}".format(matrix=str(matrix)))
+  logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
