@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Sonntag, 15. März 2020 14:11 von Leander Jedamus
+# modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
 # modified Saturday, 14. March 2020 14:13 by Leander Jedamus
@@ -13,6 +13,7 @@
 from __future__ import print_function
 import logging
 import matrizen
+import re
 import sys
 import os
 import gettext
@@ -55,7 +56,7 @@ def zahleneingabe(n1,n2,ausgabe):
     except KeyboardInterrupt:
       print()
       exit(-1)
-    if not inp.isdigit():
+    if not re.match(r"[-+]*\d+",inp):
       print(_("Wrong input!"))
     else:
       n = int(inp)
