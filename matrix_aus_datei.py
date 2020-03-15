@@ -2,6 +2,8 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modified Sunday, 15. March 2020 06:55 by Leander Jedamus
+# modifiziert Sonntag, 15. März 2020 06:53 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:59 von Leander Jedamus
 
 from __future__ import print_function
@@ -125,6 +127,9 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           for j in range(power):
             matrix[i][j] += mat[i][j]
 
+  if not has_n:
+    logger.error(_("No n defined!"))
+    exit(-1)
   datei.close()
 
   if(bits_count > power):
