@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Montag, 16. März 2020 08:16 von Leander Jedamus
+# modifiziert Montag, 16. März 2020 13:25 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
@@ -50,7 +50,7 @@ log.addHandler(stdout_handler)
 log.setLevel(logging.INFO)
 """
 
-def zahleneingabe(n1,n2,output):
+def input_number(n1,n2,output):
   while(True):
     try:
       inp = my_input(output)
@@ -67,13 +67,13 @@ def zahleneingabe(n1,n2,output):
         print(_("Wrong input!"))
   return(n)
 
-def vektorabfrage(power,bits,output,modify):
+def ask_vector(power,bits,output,modify):
   while(True):
     for i in range(power):
       if bits[i] != "":
         print(bits[i])
 
-    j = zahleneingabe(1,power,output)
+    j = input_number(1,power,output)
     if bits[j-1] == "":
       print(_("Wrong input!"))
     else:
@@ -84,7 +84,8 @@ def vektorabfrage(power,bits,output,modify):
   return(j)
 
 def matrix_interaktiv():
-  n = zahleneingabe(2,13,"n = ")
+  debug_enabled = logger.isEnabledFor(logging.DEBUG)
+  n = input_number(1,13,"n = ")
   (bits, vector) = matrizen.bits_and_vector(n)
   power = 2**n
   matrix = []
@@ -103,19 +104,19 @@ def matrix_interaktiv():
     ket.append("{i:d}. {ket:s}".format(i=i+1,ket=bits[i]))
   bras = power
   while(bras > 0):
-    j = vektorabfrage(power,bra,_('Wich bra (input vector):'),True)
-    if logger.isEnabledFor(logging.DEBUG):
+    j = ask_vector(power,bra,_('Wich bra (input vector):'),True)
+    if debug_enabled:
       logger.debug("bits = {bits:s}".format(bits=bits))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=j-1,bits=bits[j-1]))
     bras -= 1
     s_vector = vector[j-1]
-    if logger.isEnabledFor(logging.DEBUG):
+    if debug_enabled:
       logger.debug("s_vector = {s_vector:s}".format(s_vector=s_vector))
 
-    k = vektorabfrage(power,ket,_('Wich Ket (output vector):'),False)
+    k = ask_vector(power,ket,_('Wich Ket (output vector):'),False)
     z_vector = vector[k-1]
     mat = matrizen.mat_mul(s_vector,z_vector,n)
-    if logger.isEnabledFor(logging.DEBUG):
+    if debug_enabled:
       logger.debug("bits = {bits:s}".format(bits=bits))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=k-1,bits=bits[k-1]))
       logger.debug("z_vector = {z_vector:s}".format(z_vector=z_vector))
