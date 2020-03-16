@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Montag, 16. März 2020 08:26 von Leander Jedamus
+# modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
 # modified Sunday, 15. March 2020 06:55 by Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 06:53 von Leander Jedamus
@@ -31,7 +31,15 @@ except IOError:
     return s
 
 def matrix_aus_datei(filename="matrix_cnot.dat"):
-  datei = open(filename,"r")
+  try:
+    datei = open(filename,"r")
+  except IOError as e:
+    logger.fatal(e)
+    exit(-1)
+
+  debug_enabled = logger.isEnabledFor(logging.DEBUG)
+  error_enabled = logger.isEnabledFor(logging.ERROR)
+
   reg_comment = re.compile(r"^#.*")
   reg_empty = re.compile(r"^$")
   reg_n = re.compile(r"n = (\d+)")
@@ -55,23 +63,23 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
     if (re.match(reg_empty,line)):
       continue
 
-    if logger.isEnabledFor(logging.DEBUG):
+    if debug_enabled:
       logger.debug("line = " + line)
 
     if not has_n:
       # n auslesen
       if (re.match(reg_n,line)):
-        if logger.isEnabledFor(logging.DEBUG):
+        if debug_enabled:
           logger.debug(_("found n"))
         n = re.sub(reg_n,"\g<1>",line)
         if n.isdigit():
           n = int(n)
           has_n = True
-          if logger.isEnabledFor(logging.DEBUG):
+          if debug_enabled:
             logger.debug("n = {n:d}".format(n=n))
 
           (bits,vector) = matrizen.bits_and_vector(n)
-          if logger.isEnabledFor(logging.DEBUG):
+          if debug_enabled:
             logger.debug("bits = {bits:s}".format(bits=bits))
             logger.debug("vector = {vector:s}".format(vector=vector))
 
@@ -88,12 +96,12 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           logger.fatal(_("n is not a decimal"))
     else:
       if (re.match(reg_bits,line)):
-        if logger.isEnabledFor(logging.DEBUG):
+        if debug_enabled:
           logger.debug(_("found bits"))
         line = re.sub(reg_bits,"\g<1> \g<2>",line)
         lbits = re.sub(reg_lbits,"\g<1>",line)
         rbits = re.sub(reg_rbits,"\g<1>",line)
-        if logger.isEnabledFor(logging.DEBUG):
+        if debug_enabled:
           logger.debug("lbits = " + lbits)
           logger.debug("rbits = " + rbits)
 
@@ -107,15 +115,15 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             logger.debug(_("index of lbits = {i:d}").format(i=i))
         if rbits == bits[i]:
           z_index = i
-          if logger.isEnabledFor(logging.DEBUG):
+          if debug_enabled:
             logger.debug(_("index of rbits = {i:d}").format(i=i))
 
       if((s_index == -1) or (z_index == -1)):
-        if logger.isEnabledFor(logging.ERROR):
+        if error_enabled:
           logger.error(_("bits not found in line {line_no:d}").format(line_no=line_no))
       else:
         if(has_bits[s_index]):
-          if logger.isEnabledFor(logging.ERROR):
+          if error_enabled:
             logger.error(_("bits double in line {line_no:d}").format(line_no=line_no))
         else:
           has_bits[s_index] = True
@@ -124,7 +132,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         s_vector = vector[s_index]
         z_vector = vector[z_index]
         mat = matrizen.mat_mul(s_vector,z_vector,n)
-        if logger.isEnabledFor(logging.DEBUG):
+        if debug_enabled:
           logger.debug("mat = {mat:s}".format(mat=mat))
 
         for i in range(power):
@@ -132,17 +140,17 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             matrix[i][j] += mat[i][j]
 
   if not has_n:
-    logger.error(_("No n defined!"))
+    logger.fatal(_("No n defined!"))
     exit(-1)
   datei.close()
 
   if(bits_count > power):
     if logger.isEnabledFor(logging.ERROR):
-      logger.error(_("too many bits in file"))
+      logger.fatal(_("too many bits in file"))
     exit(-1)
   elif(bits_count < power):         
     if logger.isEnabledFor(logging.ERROR):
-      logger.error(_("not enough bits in file"))
+      logger.fatal(_("not enough bits in file"))
     exit(-1)
 
   logger.debug("matrix = {matrix:s}".format(matrix=matrix))
