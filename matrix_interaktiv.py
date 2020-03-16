@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Montag, 16. März 2020 07:39 von Leander Jedamus
+# modifiziert Montag, 16. März 2020 07:49 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
@@ -97,39 +97,29 @@ def matrix_interaktiv():
 
   # bra und ket einlesen
   bra = []
-  bra_ind = []
+  ket = []
   for i in range(power):
     bra.append("{i:d}. {bra:s}".format(i=i+1,bra=bits[i]))
-    bra_ind.append(i)
-  if logger.isEnabledFor(logging.DEBUG):
-    logger.debug("bra_ind = {bra_ind:s}".format(bra_ind=str(bra_ind)))
+    ket.append("{i:d}. {ket:s}".format(i=i+1,ket=bits[i]))
   bras = power
   while(bras > 0):
     j = vektorabfrage(power,bra,_('Wich bra (input vector):'),True)
     if logger.isEnabledFor(logging.DEBUG):
-      logger.debug("bits = {bits:s}".format(bits=str(bits)))
-      logger.debug("bits[{index:d}] = {bits:s}".format(index=bra_ind[j-1],bits=bits[bra_ind[j-1]]))
+      logger.debug("bits = {bits:s}".format(bits=bits))
+      logger.debug("bits[{index:d}] = {bits:s}".format(index=j-1,bits=bits[j-1]))
     bras -= 1
-    s_vector = vector[bra_ind[j-1]]
+    s_vector = vector[j-1]
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug("s_vector = {s_vector:s}".format(s_vector=s_vector))
 
-    ket = []
-    ket_ind = []
-    for i in range(power):
-      ket.append("{i:d}. {ket:s}".format(i=i+1,ket=bits[i]))
-      ket_ind.append(i)
-    if logger.isEnabledFor(logging.DEBUG):
-      logger.debug("ket_ind = {ket_ind:s}".format(ket_ind=str(ket_ind)))
-
     k = vektorabfrage(power,ket,_('Wich Ket (output vector):'),False)
-    z_vector = vector[ket_ind[k-1]]
+    z_vector = vector[k-1]
     mat = matrizen.mat_mul(s_vector,z_vector,n)
     if logger.isEnabledFor(logging.DEBUG):
-      logger.debug("bits = {bits:s}".format(bits=str(bits)))
-      logger.debug("bits[{index:d}] = {bits:s}".format(index=ket_ind[k-1],bits=bits[ket_ind[k-1]]))
-      logger.debug("{z_vector:s}".format(z_vector=z_vector))
-      logger.debug("mat = {mat:s}".format(mat=str(mat)))
+      logger.debug("bits = {bits:s}".format(bits=bits))
+      logger.debug("bits[{index:d}] = {bits:s}".format(index=k-1,bits=bits[k-1]))
+      logger.debug("z_vector = {z_vector:s}".format(z_vector=z_vector))
+      logger.debug("mat = {mat:s}".format(mat=mat))
 
     for i in range(power):
       for j in range(power):
