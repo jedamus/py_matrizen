@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
+# modifiziert Montag, 16. März 2020 07:39 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
@@ -49,10 +50,10 @@ log.addHandler(stdout_handler)
 log.setLevel(logging.INFO)
 """
 
-def zahleneingabe(n1,n2,ausgabe):
+def zahleneingabe(n1,n2,output):
   while(True):
     try:
-      inp = my_input(ausgabe)
+      inp = my_input(output)
     except KeyboardInterrupt:
       print()
       exit(-1)
@@ -66,17 +67,18 @@ def zahleneingabe(n1,n2,ausgabe):
         print(_("Wrong input!"))
   return(n)
 
-def vektorabfrage(power,bits,ausgabe):
+def vektorabfrage(power,bits,output,modify):
   while(True):
     for i in range(power):
       if bits[i] != "":
         print(bits[i])
 
-    j = zahleneingabe(1,power,ausgabe)
+    j = zahleneingabe(1,power,output)
     if bits[j-1] == "":
       print(_("Wrong input!"))
     else:
-      bits[j-1] = ""
+      if modify:
+        bits[j-1] = ""
       break
 
   return(j)
@@ -103,7 +105,7 @@ def matrix_interaktiv():
     logger.debug("bra_ind = {bra_ind:s}".format(bra_ind=str(bra_ind)))
   bras = power
   while(bras > 0):
-    j = vektorabfrage(power,bra,_('Wich bra (input vector):'))
+    j = vektorabfrage(power,bra,_('Wich bra (input vector):'),True)
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=bra_ind[j-1],bits=bits[bra_ind[j-1]]))
@@ -120,7 +122,7 @@ def matrix_interaktiv():
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug("ket_ind = {ket_ind:s}".format(ket_ind=str(ket_ind)))
 
-    k = vektorabfrage(power,ket,_('Wich Ket (output vector):'))
+    k = vektorabfrage(power,ket,_('Wich Ket (output vector):'),False)
     z_vector = vector[ket_ind[k-1]]
     mat = matrizen.mat_mul(s_vector,z_vector,n)
     if logger.isEnabledFor(logging.DEBUG):
