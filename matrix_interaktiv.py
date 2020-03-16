@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Montag, 16. März 2020 07:49 von Leander Jedamus
+# modifiziert Montag, 16. März 2020 08:16 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
 # modifiziert Samstag, 14. März 2020 14:15 von Leander Jedamus
@@ -125,7 +125,7 @@ def matrix_interaktiv():
       for j in range(power):
         matrix[i][j] += mat[i][j]
               
-  logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
+  logger.debug("matrix = {matrix:s}".format(matrix=matrix))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
