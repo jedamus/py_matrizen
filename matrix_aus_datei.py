@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Montag, 16. März 2020 08:17 von Leander Jedamus
+# modifiziert Montag, 16. März 2020 08:26 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
 # modified Sunday, 15. March 2020 06:55 by Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 06:53 von Leander Jedamus
@@ -67,11 +67,13 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         if n.isdigit():
           n = int(n)
           has_n = True
-          logger.debug("n = {n:d}".format(n=n))
+          if logger.isEnabledFor(logging.DEBUG):
+            logger.debug("n = {n:d}".format(n=n))
 
           (bits,vector) = matrizen.bits_and_vector(n)
-          logger.debug("bits = {bits:s}".format(bits=bits))
-          logger.debug("vector = {vector:s}".format(vector=vector))
+          if logger.isEnabledFor(logging.DEBUG):
+            logger.debug("bits = {bits:s}".format(bits=bits))
+            logger.debug("vector = {vector:s}".format(vector=vector))
 
           power = 2**n
           for i in range(power):
