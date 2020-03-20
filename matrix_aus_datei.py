@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
 # modified Sunday, 15. March 2020 06:55 by Leander Jedamus
@@ -24,7 +25,8 @@ import gettext
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
   trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
-  trans.install(unicode=True)
+# trans.install(unicode=True)
+  trans.install()
 except IOError:
   logger.error("Fehler in gettext")
   def _(s):
@@ -80,8 +82,8 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
           (bits,vector) = matrizen.bits_and_vector(n)
           if debug_enabled:
-            logger.debug("bits = {bits:s}".format(bits=bits))
-            logger.debug("vector = {vector:s}".format(vector=vector))
+            logger.debug("bits = {bits:s}".format(bits=str(bits)))
+            logger.debug("vector = {vector:s}".format(vector=str(vector)))
 
           power = 2**n
           for i in range(power):
@@ -133,7 +135,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         z_vector = vector[z_index]
         mat = matrizen.mat_mul(s_vector,z_vector,n)
         if debug_enabled:
-          logger.debug("mat = {mat:s}".format(mat=mat))
+          logger.debug("mat = {mat:s}".format(mat=str(mat)))
 
         for i in range(power):
           for j in range(power):
@@ -153,7 +155,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
       logger.fatal(_("not enough bits in file"))
     exit(-1)
 
-  logger.debug("matrix = {matrix:s}".format(matrix=matrix))
+  logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab

@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
+# modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
 
 from __future__ import print_function
@@ -13,7 +14,6 @@ import logging
 import logging.config
 import atexit
 import time
-import log
 import matrix_aus_datei as datei
 import matrix_interaktiv as interaktiv
 
@@ -47,7 +47,10 @@ logger.setLevel(logging.DEBUG)
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
   trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
-  trans.install(unicode=True)
+  if int(sys.version_info.major) < 3:
+    trans.install(unicode=True)
+  else:
+    trans.install()
 except IOError:
   print("name = " + __name__)
   logger.error("Fehler in gettext")
@@ -68,7 +71,7 @@ if __name__ == '__main__':
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
     matrix = datei.matrix_aus_datei(filename)
-  print("matrix = {matrix:s}".format(matrix=matrix))
+  print("matrix = {matrix:s}".format(matrix=str(matrix)))
 
 # vim:ai sw=2 sts=4 expandtab
 

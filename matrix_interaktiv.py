@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
+# modifiziert Freitag, 20. März 2020 09:43 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:25 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
 # modified Sunday, 15. March 2020 07:17 by Leander Jedamus
@@ -29,7 +30,10 @@ logger = logging.getLogger(__name__)
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
   trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
-  trans.install(unicode=True)
+  if int(sys.version_info.major) < 3:
+    trans.install(unicode=True)
+  else:
+    trans.install()
 except IOError:
   logger.error("Fehler in gettext")
   def _(s):
@@ -106,27 +110,27 @@ def matrix_interaktiv():
   while(bras > 0):
     j = ask_vector(power,bra,_('Wich bra (input vector):'),True)
     if debug_enabled:
-      logger.debug("bits = {bits:s}".format(bits=bits))
+      logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=j-1,bits=bits[j-1]))
     bras -= 1
     s_vector = vector[j-1]
     if debug_enabled:
-      logger.debug("s_vector = {s_vector:s}".format(s_vector=s_vector))
+      logger.debug("s_vector = {s_vector:s}".format(s_vector=str(s_vector)))
 
     k = ask_vector(power,ket,_('Wich Ket (output vector):'),False)
     z_vector = vector[k-1]
     mat = matrizen.mat_mul(s_vector,z_vector,n)
     if debug_enabled:
-      logger.debug("bits = {bits:s}".format(bits=bits))
+      logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=k-1,bits=bits[k-1]))
-      logger.debug("z_vector = {z_vector:s}".format(z_vector=z_vector))
-      logger.debug("mat = {mat:s}".format(mat=mat))
+      logger.debug("z_vector = {z_vector:s}".format(z_vector=str(z_vector)))
+      logger.debug("mat = {mat:s}".format(mat=str(mat)))
 
     for i in range(power):
       for j in range(power):
         matrix[i][j] += mat[i][j]
               
-  logger.debug("matrix = {matrix:s}".format(matrix=matrix))
+  logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
