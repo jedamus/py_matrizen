@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 31. März 2020 22:18 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 22:23 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 22:53 von Leander Jedamus
 
 from __future__ import print_function
 
