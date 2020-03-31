@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-03-31 20:52+0200\n"
+"POT-Creation-Date: 2020-03-31 22:48+0200\n"
 "PO-Revision-Date: 2020-03-14 14:00+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -34,9 +34,8 @@ msgid "Wrong create!"
 msgstr "Falsches create !"
 
 #: main.py:87
-#, fuzzy
 msgid "creating \"{filename:s}\"."
-msgstr "Eingabe aus \"{filename:s}\"."
+msgstr "Erzeuge \"{filename:s}\"."
 
 #: main.py:91
 msgid "input from \"{filename:s}\"."
@@ -46,43 +45,37 @@ msgstr "Eingabe aus \"{filename:s}\"."
 msgid "found n"
 msgstr "n gefunden"
 
-#: matrix_aus_datei.py:94
+#: matrix_aus_datei.py:90
 msgid "n is not a decimal"
 msgstr "n ist keine Zahl"
 
-#: matrix_aus_datei.py:98
+#: matrix_aus_datei.py:94
 msgid "found bits"
 msgstr "bits gefunden"
 
-#: matrix_aus_datei.py:113
+#: matrix_aus_datei.py:104
 #, python-brace-format
-msgid "index of lbits = {i:d}"
-msgstr "Index der lbits = {i:d}"
+msgid "bits not of length {power:d}"
+msgstr "Bits-Länge nicht {power:d}"
 
-#: matrix_aus_datei.py:117
-#, python-brace-format
-msgid "index of rbits = {i:d}"
-msgstr "Index der rbits = {i:d}"
-
-#: matrix_aus_datei.py:121
-#, python-brace-format
-msgid "bits not found in line {line_no:d}"
-msgstr "Bits nicht gefunden in Zeile {line_no:d}"
-
-#: matrix_aus_datei.py:125
+#: matrix_aus_datei.py:119
 #, python-brace-format
 msgid "bits double in line {line_no:d}"
-msgstr "Doppelte bits in Zeile {line_no:d}"
+msgstr "Doppelte Bits in Zeile {line_no:d}"
 
-#: matrix_aus_datei.py:141
+#: matrix_aus_datei.py:131
+msgid "Line doesn't match"
+msgstr "Zeile paßt nicht"
+
+#: matrix_aus_datei.py:135
 msgid "No n defined!"
 msgstr "n wurde nicht definiert!"
 
-#: matrix_aus_datei.py:147
+#: matrix_aus_datei.py:141
 msgid "too many bits in file"
 msgstr "Zu viele bits in der Datei"
 
-#: matrix_aus_datei.py:151
+#: matrix_aus_datei.py:145
 msgid "not enough bits in file"
 msgstr "Nicht genügend bits in der Datei"
 

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-03-31 20:54+0200\n"
-"PO-Revision-Date: 2020-03-31 20:54+0200\n"
+"POT-Creation-Date: 2020-03-31 22:49+0200\n"
+"PO-Revision-Date: 2020-03-31 22:49+0200\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -45,43 +45,37 @@ msgstr ""
 msgid "found n"
 msgstr ""
 
-#: matrix_aus_datei.py:94
+#: matrix_aus_datei.py:90
 msgid "n is not a decimal"
 msgstr ""
 
-#: matrix_aus_datei.py:98
+#: matrix_aus_datei.py:94
 msgid "found bits"
 msgstr ""
 
-#: matrix_aus_datei.py:113
+#: matrix_aus_datei.py:104
 #, python-brace-format
-msgid "index of lbits = {i:d}"
+msgid "bits not of length {power:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:117
-#, python-brace-format
-msgid "index of rbits = {i:d}"
-msgstr ""
-
-#: matrix_aus_datei.py:121
-#, python-brace-format
-msgid "bits not found in line {line_no:d}"
-msgstr ""
-
-#: matrix_aus_datei.py:125
+#: matrix_aus_datei.py:119
 #, python-brace-format
 msgid "bits double in line {line_no:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:141
+#: matrix_aus_datei.py:131
+msgid "Line doesn't match"
+msgstr ""
+
+#: matrix_aus_datei.py:135
 msgid "No n defined!"
 msgstr ""
 
-#: matrix_aus_datei.py:147
+#: matrix_aus_datei.py:141
 msgid "too many bits in file"
 msgstr ""
 
-#: matrix_aus_datei.py:151
+#: matrix_aus_datei.py:145
 msgid "not enough bits in file"
 msgstr ""
 
