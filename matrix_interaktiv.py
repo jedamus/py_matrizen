@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 19:17 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 19:58 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:43 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:25 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
@@ -109,15 +109,15 @@ def matrix_interaktiv():
       logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=j-1,bits=bits[j-1]))
     bras -= 1
-    s_vector = np.zeros( (1,power), dtype=np.int8 )
-    s_vector[0][j-1] = 1
+    s_vector = np.zeros( (power,1), dtype=np.int8 )
+    s_vector[j-1][0] = 1
     if debug_enabled:
       logger.debug("s_vector = {s_vector:s}".format(s_vector=str(s_vector)))
 
     k = ask_vector(power,ket,_('Wich Ket (output vector):'),False)
     z_vector = np.zeros( (1,power), dtype=np.int8 )
     z_vector[0][k-1] = 1
-    mat = s_vector.T*z_vector
+    mat = s_vector*z_vector
     if debug_enabled:
       logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=k-1,bits=bits[k-1]))
