@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 18:43 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 19:17 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:43 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:25 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
@@ -91,7 +91,7 @@ def ask_vector(power,bits,output,modify):
 
 def matrix_interaktiv():
   debug_enabled = logger.isEnabledFor(logging.DEBUG)
-  n = input_number(1,20,"n = ")
+  n = input_number(1,16,"n = ")
   bits = matrizen.bits_and_vector(n)
   power = 2**n
   matrix = np.zeros( (power,power), dtype=np.int8 )
