@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 20:00 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 21:38 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
@@ -131,11 +131,8 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         s_vector[s_index][0] = 1
         z_vector = np.zeros( (1,power), dtype=np.int8 )
         z_vector[0][z_index] = 1
-        mat = s_vector*z_vector
-        if debug_enabled:
-          logger.debug("mat = {mat:s}".format(mat=str(mat)))
 
-        matrix += mat
+        matrix += s_vector*z_vector
 
   if not has_n:
     logger.fatal(_("No n defined!"))
