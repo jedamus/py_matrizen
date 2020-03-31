@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 14:02 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 18:43 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:43 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:25 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
@@ -91,10 +91,10 @@ def ask_vector(power,bits,output,modify):
 
 def matrix_interaktiv():
   debug_enabled = logger.isEnabledFor(logging.DEBUG)
-  n = input_number(1,13,"n = ")
-  (bits, vector) = matrizen.bits_and_vector(n)
+  n = input_number(1,20,"n = ")
+  bits = matrizen.bits_and_vector(n)
   power = 2**n
-  matrix = np.zeros( (power,power), dtype=np.int8)
+  matrix = np.zeros( (power,power), dtype=np.int8 )
 
   # bra und ket einlesen
   bra = []
@@ -109,12 +109,14 @@ def matrix_interaktiv():
       logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=j-1,bits=bits[j-1]))
     bras -= 1
-    s_vector = vector[j-1]
+    s_vector = np.zeros( (1,power), dtype=np.int8 )
+    s_vector[0][j-1] = 1
     if debug_enabled:
       logger.debug("s_vector = {s_vector:s}".format(s_vector=str(s_vector)))
 
     k = ask_vector(power,ket,_('Wich Ket (output vector):'),False)
-    z_vector = vector[k-1]
+    z_vector = np.zeros( (1,power), dtype=np.int8 )
+    z_vector[0][k-1] = 1
     mat = s_vector.T*z_vector
     if debug_enabled:
       logger.debug("bits = {bits:s}".format(bits=str(bits)))
