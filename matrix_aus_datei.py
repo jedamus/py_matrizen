@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 21:38 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 22:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
@@ -81,12 +81,8 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           if debug_enabled:
             logger.debug("n = {n:d}".format(n=n))
 
-          bits = matrizen.bits_and_vector(n)
-          if debug_enabled:
-            logger.debug("bits = {bits:s}".format(bits=str(bits)))
-
           power = 2**n
-          matrix = np.zeros( (power,power), dtype=np.int8)
+          matrix = np.zeros( (power,power), dtype=np.int8 )
           for i in range(power):
             has_bits.append(False)
 
@@ -103,36 +99,33 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           logger.debug("lbits = " + lbits)
           logger.debug("rbits = " + rbits)
 
-      # lbits und rbits suchen und index merken
-      s_index = -1
-      z_index = -1
-      for i in range(power):
-        if lbits == bits[i]:
-          s_index = i
-          if logger.isEnabledFor(logging.DEBUG):
-            logger.debug(_("index of lbits = {i:d}").format(i=i))
-        if rbits == bits[i]:
-          z_index = i
+        # lbits und rbits suchen und index merken
+        if (len(lbits) != n) | (len(rbits) != n):
+          logger.fatal(_("bits not of length {power:d}").format(power=power))
+          exit(-1)
+        else:  
+          s_index = int(lbits,2)
+          z_index = int(rbits,2)
           if debug_enabled:
-            logger.debug(_("index of rbits = {i:d}").format(i=i))
+            logger.debug("s_index = {s_index:d}".format(s_index=s_index))
+            logger.debug("z_index = {z_index:d}".format(z_index=z_index))
 
-      if((s_index == -1) or (z_index == -1)):
-        if error_enabled:
-          logger.error(_("bits not found in line {line_no:d}").format(line_no=line_no))
+          if(has_bits[s_index]):
+            if error_enabled:
+              logger.error(_("bits double in line {line_no:d}").format(line_no=line_no))
+          else:
+            has_bits[s_index] = True
+
+            bits_count += 1
+            s_vector = np.zeros( (power,1), dtype=np.int8 )
+            s_vector[s_index][0] = 1
+            z_vector = np.zeros( (1,power), dtype=np.int8 )
+            z_vector[0][z_index] = 1
+
+            matrix += s_vector*z_vector
       else:
-        if(has_bits[s_index]):
-          if error_enabled:
-            logger.error(_("bits double in line {line_no:d}").format(line_no=line_no))
-        else:
-          has_bits[s_index] = True
-
-        bits_count += 1
-        s_vector = np.zeros( (power,1), dtype=np.int8 )
-        s_vector[s_index][0] = 1
-        z_vector = np.zeros( (1,power), dtype=np.int8 )
-        z_vector[0][z_index] = 1
-
-        matrix += s_vector*z_vector
+        logger.fatal(_("Line doesn't match"))
+        exit(-1)
 
   if not has_n:
     logger.fatal(_("No n defined!"))
