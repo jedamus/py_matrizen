@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 20:42 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
 
@@ -80,7 +80,7 @@ if __name__ == '__main__':
         print(_("Wrong create!"))
       else:
         n = int(create)
-        if ((n<1) & (n>16)):
+        if ((n<1) | (n>16)):
           print(_("Wrong create!"))
         else:
           if logger.isEnabledFor(logging.DEBUG):
