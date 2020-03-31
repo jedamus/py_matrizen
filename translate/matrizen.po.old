@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-03-15 06:56+0100\n"
-"PO-Revision-Date: 2020-03-15 06:56+0100\n"
+"POT-Creation-Date: 2020-03-31 20:52+0200\n"
+"PO-Revision-Date: 2020-03-31 20:52+0200\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -17,70 +17,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:59
+#: main.py:65
 msgid "Create a matrix from input and output bits"
 msgstr ""
 
-#: main.py:61
+#: main.py:67
 msgid "select file"
 msgstr ""
 
 #: main.py:69
+msgid "create file"
+msgstr ""
+
+#: main.py:80 main.py:84
+msgid "Wrong create!"
+msgstr ""
+
+#: main.py:87
+msgid "creating \"{filename:s}\"."
+msgstr ""
+
+#: main.py:91
 msgid "input from \"{filename:s}\"."
 msgstr ""
 
-#: matrix_aus_datei.py:63
+#: matrix_aus_datei.py:76
 msgid "found n"
 msgstr ""
 
-#: matrix_aus_datei.py:84
+#: matrix_aus_datei.py:94
 msgid "n is not a decimal"
 msgstr ""
 
-#: matrix_aus_datei.py:88
+#: matrix_aus_datei.py:98
 msgid "found bits"
 msgstr ""
 
-#: matrix_aus_datei.py:103
+#: matrix_aus_datei.py:113
 #, python-brace-format
 msgid "index of lbits = {i:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:107
+#: matrix_aus_datei.py:117
 #, python-brace-format
 msgid "index of rbits = {i:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:111
+#: matrix_aus_datei.py:121
 #, python-brace-format
 msgid "bits not found in line {line_no:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:115
+#: matrix_aus_datei.py:125
 #, python-brace-format
 msgid "bits double in line {line_no:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:131
+#: matrix_aus_datei.py:141
 msgid "No n defined!"
 msgstr ""
 
-#: matrix_aus_datei.py:137
+#: matrix_aus_datei.py:147
 msgid "too many bits in file"
 msgstr ""
 
-#: matrix_aus_datei.py:141
+#: matrix_aus_datei.py:151
 msgid "not enough bits in file"
 msgstr ""
 
-#: matrix_interaktiv.py:78
+#: matrix_interaktiv.py:67 matrix_interaktiv.py:73
+#: matrix_interaktiv.py:84
+msgid "Wrong input!"
+msgstr ""
+
+#: matrix_interaktiv.py:107
 msgid "Wich bra (input vector):"
 msgstr ""
 
-#: matrix_interaktiv.py:103
+#: matrix_interaktiv.py:117
 msgid "Wich Ket (output vector):"
 msgstr ""
 
-#: matrix_interaktiv.py:118 matrix_interaktiv.py:120
-msgid "Wrong input!"
+#: matrix_create.py:16
+msgid "# file is {filename:s}\n"
 msgstr ""

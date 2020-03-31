@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-03-15 06:56+0100\n"
+"POT-Creation-Date: 2020-03-31 20:52+0200\n"
 "PO-Revision-Date: 2020-03-14 14:00+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,70 +17,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.py:59
+#: main.py:65
 msgid "Create a matrix from input and output bits"
 msgstr "Erzeuge eine Matrix aus Eingangs- und Ausgangsbits"
 
-#: main.py:61
+#: main.py:67
 msgid "select file"
 msgstr "Wähle Datei"
 
 #: main.py:69
+msgid "create file"
+msgstr "Erzeuge Datei"
+
+#: main.py:80 main.py:84
+msgid "Wrong create!"
+msgstr "Falsches create !"
+
+#: main.py:87
+#, fuzzy
+msgid "creating \"{filename:s}\"."
+msgstr "Eingabe aus \"{filename:s}\"."
+
+#: main.py:91
 msgid "input from \"{filename:s}\"."
 msgstr "Eingabe aus \"{filename:s}\"."
 
-#: matrix_aus_datei.py:63
+#: matrix_aus_datei.py:76
 msgid "found n"
 msgstr "n gefunden"
 
-#: matrix_aus_datei.py:84
+#: matrix_aus_datei.py:94
 msgid "n is not a decimal"
 msgstr "n ist keine Zahl"
 
-#: matrix_aus_datei.py:88
+#: matrix_aus_datei.py:98
 msgid "found bits"
 msgstr "bits gefunden"
 
-#: matrix_aus_datei.py:103
+#: matrix_aus_datei.py:113
 #, python-brace-format
 msgid "index of lbits = {i:d}"
 msgstr "Index der lbits = {i:d}"
 
-#: matrix_aus_datei.py:107
+#: matrix_aus_datei.py:117
 #, python-brace-format
 msgid "index of rbits = {i:d}"
 msgstr "Index der rbits = {i:d}"
 
-#: matrix_aus_datei.py:111
+#: matrix_aus_datei.py:121
 #, python-brace-format
 msgid "bits not found in line {line_no:d}"
 msgstr "Bits nicht gefunden in Zeile {line_no:d}"
 
-#: matrix_aus_datei.py:115
+#: matrix_aus_datei.py:125
 #, python-brace-format
 msgid "bits double in line {line_no:d}"
 msgstr "Doppelte bits in Zeile {line_no:d}"
 
-#: matrix_aus_datei.py:131
+#: matrix_aus_datei.py:141
 msgid "No n defined!"
 msgstr "n wurde nicht definiert!"
 
-#: matrix_aus_datei.py:137
+#: matrix_aus_datei.py:147
 msgid "too many bits in file"
 msgstr "Zu viele bits in der Datei"
 
-#: matrix_aus_datei.py:141
+#: matrix_aus_datei.py:151
 msgid "not enough bits in file"
 msgstr "Nicht genügend bits in der Datei"
 
-#: matrix_interaktiv.py:78
+#: matrix_interaktiv.py:67 matrix_interaktiv.py:73 matrix_interaktiv.py:84
+msgid "Wrong input!"
+msgstr "Falsche Eingabe!"
+
+#: matrix_interaktiv.py:107
 msgid "Wich bra (input vector):"
 msgstr "Welches Bra (Eingangsvektor):"
 
-#: matrix_interaktiv.py:103
+#: matrix_interaktiv.py:117
 msgid "Wich Ket (output vector):"
 msgstr "Welches Ket (Ausgangsvektor):"
 
-#: matrix_interaktiv.py:118 matrix_interaktiv.py:120
-msgid "Wrong input!"
-msgstr "Falsche Eingabe!"
+#: matrix_create.py:16
+msgid "# file is {filename:s}\n"
+msgstr "# Datei ist {filename:s}\n"
