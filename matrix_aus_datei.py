@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 22:51 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
@@ -89,6 +89,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         else:
           logger.fatal(_("n is not a decimal"))
     else:
+      vector_save = np.zeros( (1,power), dtype=np.int8 )
       if (re.match(reg_bits,line)):
         if debug_enabled:
           logger.debug(_("found bits"))
@@ -117,9 +118,9 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             has_bits[s_index] = True
 
             bits_count += 1
-            s_vector = np.zeros( (power,1), dtype=np.int8 )
+            s_vector = vector_save.T
             s_vector[s_index][0] = 1
-            z_vector = np.zeros( (1,power), dtype=np.int8 )
+            z_vector = vector_save
             z_vector[0][z_index] = 1
 
             matrix += s_vector*z_vector
