@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 13:51 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 18:54 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
@@ -81,10 +81,10 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           if debug_enabled:
             logger.debug("n = {n:d}".format(n=n))
 
-          (bits,vector) = matrizen.bits_and_vector(n)
+          bits = matrizen.bits_and_vector(n)
           if debug_enabled:
             logger.debug("bits = {bits:s}".format(bits=str(bits)))
-            logger.debug("mat vector = {vector:s}".format(vector=str(vector)))
+            ## logger.debug("mat vector = {vector:s}".format(vector=str(vector)))
 
           power = 2**n
           matrix = np.zeros( (power,power), dtype=np.int8)
@@ -128,9 +128,11 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           has_bits[s_index] = True
 
         bits_count += 1
-        s_vector = vector[s_index]
+        s_vector = np.zeros( (1,power), dtype=np.int8 )
+        s_vector[0][s_index] = 1
         print("s_vector = ",s_vector)
-        z_vector = vector[z_index]
+        z_vector = np.zeros( (1,power), dtype=np.int8 )
+        z_vector[0][z_index] = 1
         print("z_vector = ",z_vector)
         mat = s_vector.T*z_vector
         if debug_enabled:
