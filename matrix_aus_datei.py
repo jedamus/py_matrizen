@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 31. März 2020 18:54 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 19:08 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 14:21 von Leander Jedamus
@@ -84,7 +84,6 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           bits = matrizen.bits_and_vector(n)
           if debug_enabled:
             logger.debug("bits = {bits:s}".format(bits=str(bits)))
-            ## logger.debug("mat vector = {vector:s}".format(vector=str(vector)))
 
           power = 2**n
           matrix = np.zeros( (power,power), dtype=np.int8)
