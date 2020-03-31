@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 14:02 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:43 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:25 von Leander Jedamus
 # modifiziert Sonntag, 15. März 2020 15:07 von Leander Jedamus
@@ -14,11 +15,12 @@
 
 from __future__ import print_function
 import logging
-import matrizen
 import re
 import sys
 import os
 import gettext
+import numpy as np
+import matrizen
 
 if int(sys.version_info.major) < 3:
   my_input = raw_input
@@ -92,13 +94,7 @@ def matrix_interaktiv():
   n = input_number(1,13,"n = ")
   (bits, vector) = matrizen.bits_and_vector(n)
   power = 2**n
-  matrix = []
-  for i in range(power):
-    matrix.append([])
-
-  for i in range(power):
-    for j in range(power):
-      matrix[j].append(0)
+  matrix = np.zeros( (power,power), dtype=np.int8)
 
   # bra und ket einlesen
   bra = []
@@ -119,16 +115,14 @@ def matrix_interaktiv():
 
     k = ask_vector(power,ket,_('Wich Ket (output vector):'),False)
     z_vector = vector[k-1]
-    mat = matrizen.mat_mul(s_vector,z_vector,n)
+    mat = s_vector.T*z_vector
     if debug_enabled:
       logger.debug("bits = {bits:s}".format(bits=str(bits)))
       logger.debug("bits[{index:d}] = {bits:s}".format(index=k-1,bits=bits[k-1]))
       logger.debug("z_vector = {z_vector:s}".format(z_vector=str(z_vector)))
       logger.debug("mat = {mat:s}".format(mat=str(mat)))
 
-    for i in range(power):
-      for j in range(power):
-        matrix[i][j] += mat[i][j]
+    matrix += mat
               
   logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   return(matrix)
