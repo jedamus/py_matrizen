@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 00:48 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
@@ -14,6 +15,7 @@ from __future__ import print_function
 import re
 import os
 import sys
+import time
 import logging
 import numpy as np
 import matrizen
@@ -118,12 +120,15 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             has_bits[s_index] = True
 
             bits_count += 1
+            start_time = time.clock()
             s_vector = vector_save.T
             s_vector[s_index][0] = 1
             z_vector = vector_save
             z_vector[0][z_index] = 1
 
             matrix += s_vector*z_vector
+            end_time = time.clock()
+            logger.info(_("Vector- and Matrix-operations took {time:1.2f}").format(time=end_time-start_time))
       else:
         logger.fatal(_("Line doesn't match"))
         exit(-1)
