@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
+# modifiziert Dienstag, 31. März 2020 20:42 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
 
@@ -14,8 +15,10 @@ import logging
 import logging.config
 import atexit
 import time
+import re
 import matrix_aus_datei as datei
 import matrix_interaktiv as interaktiv
+import matrix_create as mcreate
 
 home = os.environ["HOME"]
 user = os.environ["USER"]
@@ -62,16 +65,32 @@ if __name__ == '__main__':
   parser = ArgumentParser(description = _("Create a matrix from input and output bits"))
   parser.add_argument("-f","--file", dest="filename", default="",
                       help=_("select file"))
+  parser.add_argument("-c","--create", dest="create", default="0",
+                      help=_("create file"))
   filename = parser.parse_args().filename
+  create = parser.parse_args().create
   if(filename == ""):
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug("interaktiv")
     matrix = interaktiv.matrix_interaktiv()
+    print("matrix = {matrix:s}".format(matrix=str(matrix)))
   else:
-    if logger.isEnabledFor(logging.DEBUG):
-      logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
-    matrix = datei.matrix_aus_datei(filename)
-  print("matrix = {matrix:s}".format(matrix=str(matrix)))
+    if(create != "0"):
+      if not re.match(r"[-+]*\d+",create):
+        print(_("Wrong create!"))
+      else:
+        n = int(create)
+        if ((n<1) & (n>16)):
+          print(_("Wrong create!"))
+        else:
+          if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(_("creating \"{filename:s}\".".format(filename=filename)))
+          mcreate.matrix_create(n,filename)
+    else:
+      if logger.isEnabledFor(logging.DEBUG):
+        logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
+      matrix = datei.matrix_aus_datei(filename)
+      print("matrix = {matrix:s}".format(matrix=str(matrix)))
 
 # vim:ai sw=2 sts=4 expandtab
 
