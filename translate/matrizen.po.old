@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 02:08+0200\n"
-"PO-Revision-Date: 2020-04-01 02:08+0200\n"
+"POT-Creation-Date: 2020-04-01 02:33+0200\n"
+"PO-Revision-Date: 2020-04-01 02:33+0200\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -65,29 +65,29 @@ msgstr ""
 
 #: matrix_aus_datei.py:137
 #, python-brace-format
-msgid "Vector- and Matrix-operations took {time:1.2f}"
+msgid "Vector- and Matrix-operations took {time:1.2f} seconds"
 msgstr ""
 
-#: matrix_aus_datei.py:139
+#: matrix_aus_datei.py:140
 #, python-brace-format
 msgid "Line {line_no:d} doesn't match"
 msgstr ""
 
-#: matrix_aus_datei.py:143
+#: matrix_aus_datei.py:144
 msgid "No n defined!"
 msgstr ""
 
-#: matrix_aus_datei.py:149
+#: matrix_aus_datei.py:150
 msgid "too many bits in file"
 msgstr ""
 
-#: matrix_aus_datei.py:153
+#: matrix_aus_datei.py:154
 msgid "not enough bits in file"
 msgstr ""
 
-#: matrix_aus_datei.py:157
+#: matrix_aus_datei.py:158
 #, python-brace-format
-msgid "Average time vector- and matrix-operations took {time:1.4f}"
+msgid "Average time vector- and matrix-operations took {time:1.4f} seconds"
 msgstr ""
 
 #: matrix_interaktiv.py:67 matrix_interaktiv.py:73
