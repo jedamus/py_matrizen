@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 01. April 2020 15:06 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 15:43 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
@@ -87,11 +87,11 @@ def matrix_ausgeben(matrix, matname):
 if __name__ == '__main__':
   parser = ArgumentParser(description = _("Create a matrix from input and output bits"))
   parser.add_argument("-f","--file", dest="filename", default="",
-                      help=_("select file"))
+                      help=_("select file to read"))
   parser.add_argument("-m","--matrix", dest="matname", default="",
-                      help=_("select matrix file"))
+                      help=_("select matrix file to write"))
   parser.add_argument("-c","--create", dest="create", default="0",
-                      help=_("create file"))
+                      help=_("create file to write"))
   filename = parser.parse_args().filename
   matname = parser.parse_args().matname
   create = parser.parse_args().create
