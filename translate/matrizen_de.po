@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 02:39+0200\n"
+"POT-Creation-Date: 2020-04-01 14:29+0200\n"
 "PO-Revision-Date: 2020-03-14 14:00+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,27 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.py:65
+#: main.py:77
 msgid "Create a matrix from input and output bits"
 msgstr "Erzeuge eine Matrix aus Eingangs- und Ausgangsbits"
 
-#: main.py:67
+#: main.py:79
 msgid "select file"
 msgstr "Wähle Datei"
 
-#: main.py:69
+#: main.py:81
+msgid "select matrix file"
+msgstr "Wähle Matrix-Datei"
+
+#: main.py:83
 msgid "create file"
 msgstr "Erzeuge Datei"
 
-#: main.py:80 main.py:84
+#: main.py:93 main.py:97
 msgid "Wrong create!"
 msgstr "Falsches create !"
 
-#: main.py:87
+#: main.py:100
 msgid "creating \"{filename:s}\"."
 msgstr "Erzeuge \"{filename:s}\"."
 
-#: main.py:91
+#: main.py:104
 msgid "input from \"{filename:s}\"."
 msgstr "Eingabe aus \"{filename:s}\"."
 

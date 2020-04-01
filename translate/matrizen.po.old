@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 02:39+0200\n"
-"PO-Revision-Date: 2020-04-01 02:39+0200\n"
+"POT-Creation-Date: 2020-04-01 14:28+0200\n"
+"PO-Revision-Date: 2020-04-01 14:28+0200\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -17,27 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:65
+#: main.py:77
 msgid "Create a matrix from input and output bits"
 msgstr ""
 
-#: main.py:67
+#: main.py:79
 msgid "select file"
 msgstr ""
 
-#: main.py:69
+#: main.py:81
+msgid "select matrix file"
+msgstr ""
+
+#: main.py:83
 msgid "create file"
 msgstr ""
 
-#: main.py:80 main.py:84
+#: main.py:93 main.py:97
 msgid "Wrong create!"
 msgstr ""
 
-#: main.py:87
+#: main.py:100
 msgid "creating \"{filename:s}\"."
 msgstr ""
 
-#: main.py:91
+#: main.py:104
 msgid "input from \"{filename:s}\"."
 msgstr ""
 
