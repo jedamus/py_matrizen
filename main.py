@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 15:06 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
@@ -55,25 +56,49 @@ try:
   else:
     trans.install()
 except IOError:
-  print("name = " + __name__)
   logger.error("Fehler in gettext")
   def _(s):
     return s
 
+logger = logging.getLogger(__name__)
+
+def matrix_ausgeben(matrix, matname):
+  print("matrix = {matrix:s}".format(matrix=str(matrix)))
+  if matname != "":
+    try:
+      datei = open(matname,"w")
+      (s, z) = matrix.shape
+      datei.write("[")
+      for i in range(s):
+        datei.write("[")
+        for j in range(z):
+          datei.write("{bit:d}".format(bit=matrix[i][j]))
+          if ((j+1)<z):
+            datei.write(",")
+        datei.write("]")
+        if ((i+1)<s):
+          datei.write(",")
+      datei.write("]\n")
+      datei.close()
+    except IOError as e:
+      logger.fatal(e)
+      exit(-1)
+
 if __name__ == '__main__':
-  logger = logging.getLogger(__name__)
   parser = ArgumentParser(description = _("Create a matrix from input and output bits"))
   parser.add_argument("-f","--file", dest="filename", default="",
                       help=_("select file"))
+  parser.add_argument("-m","--matrix", dest="matname", default="",
+                      help=_("select matrix file"))
   parser.add_argument("-c","--create", dest="create", default="0",
                       help=_("create file"))
   filename = parser.parse_args().filename
+  matname = parser.parse_args().matname
   create = parser.parse_args().create
   if(filename == ""):
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug("interaktiv")
-    matrix = interaktiv.matrix_interaktiv()
-    print("matrix = {matrix:s}".format(matrix=str(matrix)))
+    matrix_ausgeben(interaktiv.matrix_interaktiv(), matname)
   else:
     if(create != "0"):
       if not re.match(r"[-+]*\d+",create):
@@ -89,8 +114,7 @@ if __name__ == '__main__':
     else:
       if logger.isEnabledFor(logging.DEBUG):
         logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
-      matrix = datei.matrix_aus_datei(filename)
-      print("matrix = {matrix:s}".format(matrix=str(matrix)))
+      matrix_ausgeben(datei.matrix_aus_datei(filename), matname)
 
 # vim:ai sw=2 sts=4 expandtab
 
