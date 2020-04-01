@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 01. April 2020 02:29 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
@@ -16,15 +16,13 @@ import re
 import os
 import sys
 import time
+import copy
 import logging
+import gettext
 import numpy as np
-import matrizen
 
 logger = logging.getLogger(__name__)
 
-import os
-import sys
-import gettext
 
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
@@ -94,6 +92,8 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           logger.fatal(_("n is not a decimal"))
     else:
       vector_save = np.zeros( (1,power), dtype=np.int8 )
+      if debug_enabled:
+        logger.debug("vector_save = {vector_save:s}".format(vector_save=str(vector_save)))
       if (re.match(reg_bits,line)):
         if debug_enabled:
           logger.debug(_("found bits"))
@@ -123,10 +123,14 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
             bits_count += 1
             start_time = time.clock()
-            s_vector = vector_save.T
+            s_vector = copy.deepcopy(vector_save).T
             s_vector[s_index][0] = 1
-            z_vector = vector_save
+            z_vector = copy.deepcopy(vector_save)
             z_vector[0][z_index] = 1
+            if debug_enabled:
+              logger.debug("vector_save = {vector_save:s}".format(vector_save=str(vector_save)))
+              logger.debug("s_vector = {s_vector:s}".format(s_vector=str(s_vector)))
+              logger.debug("z_vector = {z_vector:s}".format(z_vector=str(z_vector)))
 
             matrix += s_vector*z_vector
             end_time = time.clock()
