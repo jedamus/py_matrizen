@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 01. April 2020 00:48 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 02:07 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
 # modifiziert Montag, 16. März 2020 13:18 von Leander Jedamus
@@ -45,6 +45,8 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
   debug_enabled = logger.isEnabledFor(logging.DEBUG)
   error_enabled = logger.isEnabledFor(logging.ERROR)
+  time_count = 0
+  time_sum = 0.0
 
   reg_comment = re.compile(r"^#.*")
   reg_empty = re.compile(r"^$")
@@ -128,9 +130,13 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
             matrix += s_vector*z_vector
             end_time = time.clock()
-            logger.info(_("Vector- and Matrix-operations took {time:1.2f}").format(time=end_time-start_time))
+            took_time = end_time - start_time
+            time_count += 1
+            time_sum += took_time
+
+            logger.info(_("Vector- and Matrix-operations took {time:1.2f}").format(time=took_time))
       else:
-        logger.fatal(_("Line doesn't match"))
+        logger.fatal(_("Line {line_no:d} doesn't match").format(line_no=line_no))
         exit(-1)
 
   if not has_n:
@@ -148,6 +154,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
     exit(-1)
 
   logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
+  logger.info(_("Average time vector- and matrix-operations took {time:1.4f}").format(time=time_sum/time_count))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
