@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 14:29+0200\n"
-"PO-Revision-Date: 2020-04-01 14:29+0200\n"
+"POT-Creation-Date: 2020-04-01 15:44+0200\n"
+"PO-Revision-Date: 2020-04-01 15:44+0200\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -17,39 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:77
+#: main.py:88
 msgid "Create a matrix from input and output bits"
 msgstr ""
 
-#: main.py:79
-msgid "select file"
+#: main.py:90
+msgid "select file to read"
 msgstr ""
 
-#: main.py:81
-msgid "select matrix file"
+#: main.py:92
+msgid "select matrix file to write"
 msgstr ""
 
-#: main.py:83
-msgid "create file"
+#: main.py:94
+msgid "create file to write"
 msgstr ""
 
-#: main.py:93 main.py:97
+#: main.py:105 main.py:109
 msgid "Wrong create!"
 msgstr ""
 
-#: main.py:100
+#: main.py:112
 msgid "creating \"{filename:s}\"."
 msgstr ""
 
-#: main.py:104
+#: main.py:116
 msgid "input from \"{filename:s}\"."
 msgstr ""
 
-#: matrix_aus_datei.py:80
+#: matrix_aus_datei.py:78
 msgid "found n"
 msgstr ""
 
-#: matrix_aus_datei.py:94
+#: matrix_aus_datei.py:92
 msgid "n is not a decimal"
 msgstr ""
 
@@ -67,29 +67,29 @@ msgstr ""
 msgid "bits double in line {line_no:d}"
 msgstr ""
 
-#: matrix_aus_datei.py:137
+#: matrix_aus_datei.py:141
 #, python-brace-format
 msgid "Vector- and Matrix-operations took {time:1.2f} seconds"
 msgstr ""
 
-#: matrix_aus_datei.py:140
+#: matrix_aus_datei.py:144
 #, python-brace-format
 msgid "Line {line_no:d} doesn't match"
 msgstr ""
 
-#: matrix_aus_datei.py:144
+#: matrix_aus_datei.py:148
 msgid "No n defined!"
 msgstr ""
 
-#: matrix_aus_datei.py:150
+#: matrix_aus_datei.py:154
 msgid "too many bits in file"
 msgstr ""
 
-#: matrix_aus_datei.py:154
+#: matrix_aus_datei.py:158
 msgid "not enough bits in file"
 msgstr ""
 
-#: matrix_aus_datei.py:158
+#: matrix_aus_datei.py:162
 #, python-brace-format
 msgid "Average time vector- and matrix-operations took {time:1.4f} seconds"
 msgstr ""

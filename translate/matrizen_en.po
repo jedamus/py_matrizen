@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 14:29+0200\n"
+"POT-Creation-Date: 2020-04-01 15:44+0200\n"
 "PO-Revision-Date: 2020-03-14 14:00+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,43 +17,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.py:77
+#: main.py:88
 msgid "Create a matrix from input and output bits"
 msgstr "Create a matrix from input and output bits"
 
-#: main.py:79
-msgid "select file"
-msgstr "select file"
-
-#: main.py:81
+#: main.py:90
 #, fuzzy
-msgid "select matrix file"
+msgid "select file to read"
 msgstr "select file"
 
-#: main.py:83
+#: main.py:92
 #, fuzzy
-msgid "create file"
+msgid "select matrix file to write"
 msgstr "select file"
 
-#: main.py:93 main.py:97
+#: main.py:94
+#, fuzzy
+msgid "create file to write"
+msgstr "select file"
+
+#: main.py:105 main.py:109
 #, fuzzy
 msgid "Wrong create!"
 msgstr "Wrong input!"
 
-#: main.py:100
+#: main.py:112
 #, fuzzy
 msgid "creating \"{filename:s}\"."
 msgstr "input from \"{filename:s}\"."
 
-#: main.py:104
+#: main.py:116
 msgid "input from \"{filename:s}\"."
 msgstr "input from \"{filename:s}\"."
 
-#: matrix_aus_datei.py:80
+#: matrix_aus_datei.py:78
 msgid "found n"
 msgstr "found n"
 
-#: matrix_aus_datei.py:94
+#: matrix_aus_datei.py:92
 msgid "n is not a decimal"
 msgstr "n is not a decimal"
 
@@ -71,29 +72,29 @@ msgstr "bits not found in line {line_no:d}"
 msgid "bits double in line {line_no:d}"
 msgstr "bits double in line {line_no:d}"
 
-#: matrix_aus_datei.py:137
+#: matrix_aus_datei.py:141
 #, fuzzy, python-brace-format
 msgid "Vector- and Matrix-operations took {time:1.2f} seconds"
 msgstr "Vector- and Matrix-operations took {time:1.2f}"
 
-#: matrix_aus_datei.py:140
+#: matrix_aus_datei.py:144
 #, fuzzy, python-brace-format
 msgid "Line {line_no:d} doesn't match"
 msgstr "Line doesn't match"
 
-#: matrix_aus_datei.py:144
+#: matrix_aus_datei.py:148
 msgid "No n defined!"
 msgstr "No n defined!"
 
-#: matrix_aus_datei.py:150
+#: matrix_aus_datei.py:154
 msgid "too many bits in file"
 msgstr "too many bits in file"
 
-#: matrix_aus_datei.py:154
+#: matrix_aus_datei.py:158
 msgid "not enough bits in file"
 msgstr "not enough bits in file"
 
-#: matrix_aus_datei.py:158
+#: matrix_aus_datei.py:162
 #, fuzzy, python-brace-format
 msgid "Average time vector- and matrix-operations took {time:1.4f} seconds"
 msgstr "Vector- and Matrix-operations took {time:1.2f}"
