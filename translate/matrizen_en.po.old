@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 00:47+0200\n"
+"POT-Creation-Date: 2020-04-01 02:08+0200\n"
 "PO-Revision-Date: 2020-03-14 14:00+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -44,48 +44,54 @@ msgstr "input from \"{filename:s}\"."
 msgid "input from \"{filename:s}\"."
 msgstr "input from \"{filename:s}\"."
 
-#: matrix_aus_datei.py:77
+#: matrix_aus_datei.py:80
 msgid "found n"
 msgstr "found n"
 
-#: matrix_aus_datei.py:91
+#: matrix_aus_datei.py:94
 msgid "n is not a decimal"
 msgstr "n is not a decimal"
 
-#: matrix_aus_datei.py:96
+#: matrix_aus_datei.py:99
 msgid "found bits"
 msgstr "found bits"
 
-#: matrix_aus_datei.py:106
+#: matrix_aus_datei.py:109
 #, fuzzy, python-brace-format
 msgid "bits not of length {power:d}"
 msgstr "bits not found in line {line_no:d}"
 
-#: matrix_aus_datei.py:117
+#: matrix_aus_datei.py:120
 #, python-brace-format
 msgid "bits double in line {line_no:d}"
 msgstr "bits double in line {line_no:d}"
 
-#: matrix_aus_datei.py:130
+#: matrix_aus_datei.py:137
 #, python-brace-format
 msgid "Vector- and Matrix-operations took {time:1.2f}"
 msgstr "Vector- and Matrix-operations took {time:1.2f}"
 
-#: matrix_aus_datei.py:132
-msgid "Line doesn't match"
+#: matrix_aus_datei.py:139
+#, fuzzy, python-brace-format
+msgid "Line {line_no:d} doesn't match"
 msgstr "Line doesn't match"
 
-#: matrix_aus_datei.py:136
+#: matrix_aus_datei.py:143
 msgid "No n defined!"
 msgstr "No n defined!"
 
-#: matrix_aus_datei.py:142
+#: matrix_aus_datei.py:149
 msgid "too many bits in file"
 msgstr "too many bits in file"
 
-#: matrix_aus_datei.py:146
+#: matrix_aus_datei.py:153
 msgid "not enough bits in file"
 msgstr "not enough bits in file"
+
+#: matrix_aus_datei.py:157
+#, fuzzy, python-brace-format
+msgid "Average time vector- and matrix-operations took {time:1.4f}"
+msgstr "Vector- and Matrix-operations took {time:1.2f}"
 
 #: matrix_interaktiv.py:67 matrix_interaktiv.py:73 matrix_interaktiv.py:84
 msgid "Wrong input!"
@@ -103,6 +109,12 @@ msgstr "Wich Ket (output vector):"
 #, fuzzy
 msgid "# file is {filename:s}\n"
 msgstr "input from \"{filename:s}\"."
+
+#, fuzzy
+#~ msgid ""
+#~ "Average time vector- and matrix-operations took {time:1.2f})."
+#~ "format(time=time_sum/time_count))"
+#~ msgstr "Vector- and Matrix-operations took {time:1.2f}"
 
 #~ msgid "index of lbits = {i:d}"
 #~ msgstr "index of lbits = {i:d}"
