@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-01 02:35+0200\n"
+"POT-Creation-Date: 2020-04-01 02:39+0200\n"
 "PO-Revision-Date: 2020-03-14 14:00+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -66,7 +66,7 @@ msgstr "Doppelte Bits in Zeile {line_no:d}"
 #: matrix_aus_datei.py:137
 #, python-brace-format
 msgid "Vector- and Matrix-operations took {time:1.2f} seconds"
-msgstr "Vektor- und Matrizen-operationen brauchten {time:1.2f} Sekunden"
+msgstr "Vektor- und Matrizen-Operationen brauchten {time:1.2f} Sekunden"
 
 #: matrix_aus_datei.py:140
 #, python-brace-format
@@ -107,9 +107,3 @@ msgstr "Welches Ket (Ausgangsvektor):"
 #: matrix_create.py:16
 msgid "# file is {filename:s}\n"
 msgstr "# Datei ist {filename:s}\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "Average time vector- and matrix-operations took {time:1.2f})."
-#~ "format(time=time_sum/time_count))"
-#~ msgstr "Vektor- und Matrizen-operationen brauchten {time:1.2f}"
