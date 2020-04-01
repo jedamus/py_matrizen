@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Mittwoch, 01. April 2020 14:06 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 01. April 2020 15:35 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 15:40 von Leander Jedamus
 
 from __future__ import print_function
 import logging
@@ -18,7 +18,7 @@ print("matrix = {matrix:s}".format(matrix=np.array_str(matrix)))
 print("matrix.shape = ", matrix.shape)
 
 try:
-  datei = open("matrix_cnot.mat","r")
+  datei = open("matrix_xor.mat","r")
   mat = ""
   for line in datei:
     mat += line.strip()
