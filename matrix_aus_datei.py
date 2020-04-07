@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 07. April 2020 09:37 von Leander Jedamus
+# modifiziert Dienstag, 07. April 2020 11:43 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
@@ -197,6 +197,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
       logger.fatal(_("not enough bits in file"))
     exit(-1)
 
+  calculate.Queue.join()
   logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   #logger.info(_("Average time vector- and matrix-operations took {time:1.4f} seconds").format(time=time_sum/time_count))
   return(matrix)
