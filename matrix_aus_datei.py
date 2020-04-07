@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 07. April 2020 16:01 von Leander Jedamus
+# modifiziert Dienstag, 07. April 2020 16:21 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
@@ -47,19 +47,15 @@ class calculate(threading.Thread):
   def run(self):
     global matrix
 
-    (s_index, z_index) = calculate.Queue.get()
-    logger.warning("Got s_index={s_index:d} and z_index={z_index:d}.".format(s_index=s_index, z_index=z_index))
-    logger.warning("in run before calc_the_matrix.")
-    temp_matrix = self.calc_the_matrix(s_index, z_index)
-    logger.warning("in run after calc_the_matrix.")
+    while True:
+      (s_index, z_index) = calculate.Queue.get()
+      temp_matrix = self.calc_the_matrix(s_index, z_index)
 
-    calculate.Lock.acquire()
-    logger.warning("after acquiring locking.")
-    matrix += temp_matrix
-    calculate.Lock.release()
-    logger.warning("after release locking.")
-    calculate.Queue.task_done()
-    logger.warning("after task done.")
+      calculate.Lock.acquire()
+      matrix += temp_matrix
+      calculate.Lock.release()
+
+      calculate.Queue.task_done()
 
   def calc_the_matrix(self, s_index, z_index):
     global vector_save
