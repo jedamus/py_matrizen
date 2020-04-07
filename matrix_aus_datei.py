@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 07. April 2020 09:14 von Leander Jedamus
+# modifiziert Dienstag, 07. April 2020 09:37 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
@@ -21,9 +21,10 @@ import copy
 import logging
 import gettext
 import numpy as np
+import threading
+import queue
 
 logger = logging.getLogger(__name__)
-
 
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
@@ -35,19 +36,45 @@ except IOError:
   def _(s):
     return s
 
-def calc_the_matrix(s_index, z_index, vector_save):
-  s_vector = copy.deepcopy(vector_save).T
-  s_vector[s_index][0] = 1
-  z_vector = copy.deepcopy(vector_save)
-  z_vector[0][z_index] = 1
-  if logger.isEnabledFor(logging.DEBUG):
-    logger.debug("vector_save = {vector_save:s}".format(vector_save=str(vector_save)))
-    logger.debug("s_vector = {s_vector:s}".format(s_vector=str(s_vector)))
-    logger.debug("z_vector = {z_vector:s}".format(z_vector=str(z_vector)))
+vector_save = None
+matrix = None
+worker_count = 4
 
-  return(s_vector*z_vector)
+class calculate(threading.Thread):
+  Lock = threading.Lock()
+  Queue = queue.Queue()
+
+  def run(self):
+    global matrix
+
+    (s_index, z_index) = calculate.Queue.get()
+    temp_matrix = self.calc_the_matrix(s_index, z_index)
+
+    calculate.Lock.acquire()
+    matrix += temp_matrix
+    calculate.Lock.release()
+
+    calculate.Queue.task_done()
+
+  def calc_the_matrix(self, s_index, z_index):
+    global vector_save
+
+    s_vector = copy.deepcopy(vector_save).T
+    s_vector[s_index][0] = 1
+    z_vector = copy.deepcopy(vector_save)
+    z_vector[0][z_index] = 1
+    if logger.isEnabledFor(logging.DEBUG):
+      logger.debug("vector_save = {vector_save:s}".format(vector_save=str(vector_save)))
+      logger.debug("s_vector = {s_vector:s}".format(s_vector=str(s_vector)))
+      logger.debug("z_vector = {z_vector:s}".format(z_vector=str(z_vector)))
+
+    return(s_vector*z_vector)
 
 def matrix_aus_datei(filename="matrix_cnot.dat"):
+  global matrix
+  global vector_save
+  global worker_count
+
   try:
     datei = open(filename,"r")
   except IOError as e:
@@ -105,6 +132,11 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           logger.fatal(_("n is not a decimal"))
     else:
       vector_save = np.zeros( (1,power), dtype=np.int8 )
+      meine_threads = [calculate() for i in range(worker_count)]
+      for thread in meine_threads:
+        thread.setDaemon(True)
+        thread.start()
+
       if debug_enabled:
         logger.debug("vector_save = {vector_save:s}".format(vector_save=str(vector_save)))
       if (re.match(reg_bits,line)):
@@ -135,14 +167,17 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             has_bits[s_index] = True
 
             bits_count += 1
-            start_time = time.clock()
-            matrix += calc_the_matrix(s_index, z_index, vector_save)
-            end_time = time.clock()
-            took_time = end_time - start_time
-            time_count += 1
-            time_sum += took_time
+            #start_time = time.clock()
+            ##calculate.Lock.acquire()
+            calculate.Queue.put((s_index, z_index))
+            #matrix += calc_the_matrix(s_index, z_index, vector_save)
+            ##calculate.Lock.release()
+            #end_time = time.clock()
+            #took_time = end_time - start_time
+            #time_count += 1
+            #time_sum += took_time
 
-            logger.info(_("Vector- and Matrix-operations took {time:1.2f} seconds").format(time=took_time))
+            #logger.info(_("Vector- and Matrix-operations took {time:1.2f} seconds").format(time=took_time))
             logger.info("bits_count = {bits_count:d}".format(bits_count=bits_count))
       else:
         logger.fatal(_("Line {line_no:d} doesn't match").format(line_no=line_no))
@@ -163,7 +198,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
     exit(-1)
 
   logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
-  logger.info(_("Average time vector- and matrix-operations took {time:1.4f} seconds").format(time=time_sum/time_count))
+  #logger.info(_("Average time vector- and matrix-operations took {time:1.4f} seconds").format(time=time_sum/time_count))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
