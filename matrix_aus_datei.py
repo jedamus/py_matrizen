@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 07. April 2020 14:49 von Leander Jedamus
+# modifiziert Dienstag, 07. April 2020 15:08 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
@@ -97,6 +97,8 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
   has_bits = []
   line_no = 0
   bits_count = 0
+  is_first = True
+
   for line in datei:
     line_no += 1
     # Kommentare ausfiltern
@@ -131,11 +133,16 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         else:
           logger.fatal(_("n is not a decimal"))
     else:
-      vector_save = np.zeros( (1,power), dtype=np.int8 )
-      worker_threads = [calculate() for i in range(worker_count)]
-      for thread in worker_threads:
-        thread.setDaemon(True)
-        thread.start()
+      if is_first:
+        is_first = False
+        vector_save = np.zeros( (1,power), dtype=np.int8 )
+        worker_threads = [calculate() for i in range(worker_count)]
+        i = 1
+        for thread in worker_threads:
+          logger.info(_("Started worker {i:d}.").format(i=i)
+          i += 1
+          thread.setDaemon(True)
+          thread.start()
 
       if debug_enabled:
         logger.debug("vector_save = {vector_save:s}".format(vector_save=str(vector_save)))
