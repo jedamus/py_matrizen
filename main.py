@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 01. April 2020 15:43 von Leander Jedamus
+# modifiziert Mittwoch, 01. April 2020 16:45 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
 # modifiziert Samstag, 14. März 2020 13:29 von Leander Jedamus
@@ -63,8 +63,8 @@ except IOError:
 logger = logging.getLogger(__name__)
 
 def matrix_ausgeben(matrix, matname):
-  print("matrix = {matrix:s}".format(matrix=str(matrix)))
   if matname != "":
+    logger.info("Writing file \"{matname:s}\" ...".format(matname=matname))
     try:
       datei = open(matname,"w")
       (s, z) = matrix.shape
@@ -77,7 +77,7 @@ def matrix_ausgeben(matrix, matname):
             datei.write(",")
         datei.write("]")
         if ((i+1)<s):
-          datei.write(",")
+          datei.write(",\n")
       datei.write("]\n")
       datei.close()
     except IOError as e:
@@ -98,7 +98,9 @@ if __name__ == '__main__':
   if(filename == ""):
     if logger.isEnabledFor(logging.DEBUG):
       logger.debug("interaktiv")
-    matrix_ausgeben(interaktiv.matrix_interaktiv(), matname)
+    matrix = interaktiv.matrix_interaktiv()
+    matrix_ausgeben(matrix, matname)
+    print("matrix = {matrix:s}".format(matrix=str(matrix)))
   else:
     if(create != "0"):
       if not re.match(r"[-+]*\d+",create):
@@ -114,7 +116,9 @@ if __name__ == '__main__':
     else:
       if logger.isEnabledFor(logging.DEBUG):
         logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
-      matrix_ausgeben(datei.matrix_aus_datei(filename), matname)
+      matrix = datei.matrix_aus_datei(filename)
+      matrix_ausgeben(matrix, matname)
+      print("matrix = {matrix:s}".format(matrix=str(matrix)))
 
 # vim:ai sw=2 sts=4 expandtab
 
