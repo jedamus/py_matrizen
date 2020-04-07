@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 07. April 2020 15:08 von Leander Jedamus
+# modifiziert Dienstag, 07. April 2020 16:01 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
@@ -48,13 +48,18 @@ class calculate(threading.Thread):
     global matrix
 
     (s_index, z_index) = calculate.Queue.get()
+    logger.warning("Got s_index={s_index:d} and z_index={z_index:d}.".format(s_index=s_index, z_index=z_index))
+    logger.warning("in run before calc_the_matrix.")
     temp_matrix = self.calc_the_matrix(s_index, z_index)
+    logger.warning("in run after calc_the_matrix.")
 
     calculate.Lock.acquire()
+    logger.warning("after acquiring locking.")
     matrix += temp_matrix
     calculate.Lock.release()
-
+    logger.warning("after release locking.")
     calculate.Queue.task_done()
+    logger.warning("after task done.")
 
   def calc_the_matrix(self, s_index, z_index):
     global vector_save
@@ -139,7 +144,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
         worker_threads = [calculate() for i in range(worker_count)]
         i = 1
         for thread in worker_threads:
-          logger.info(_("Started worker {i:d}.").format(i=i)
+          logger.info(_("Started worker {i:d}.").format(i=i))
           i += 1
           thread.setDaemon(True)
           thread.start()
@@ -176,7 +181,9 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             bits_count += 1
             #start_time = time.clock()
             ##calculate.Lock.acquire()
+            logger.debug("Before Queueing.")
             calculate.Queue.put((s_index, z_index))
+            logger.debug("After Queueing.")
             #matrix += calc_the_matrix(s_index, z_index, vector_save)
             ##calculate.Lock.release()
             #end_time = time.clock()
