@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
-# modifiziert Dienstag, 07. April 2020 09:09 von Leander Jedamus
+# modifiziert Dienstag, 07. April 2020 09:14 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:41 von Leander Jedamus
@@ -35,10 +35,7 @@ except IOError:
   def _(s):
     return s
 
-vector_save = None
-
-def calc_the_matrix(s_index, z_index):
-  global vector_save
+def calc_the_matrix(s_index, z_index, vector_save):
   s_vector = copy.deepcopy(vector_save).T
   s_vector[s_index][0] = 1
   z_vector = copy.deepcopy(vector_save)
@@ -51,7 +48,6 @@ def calc_the_matrix(s_index, z_index):
   return(s_vector*z_vector)
 
 def matrix_aus_datei(filename="matrix_cnot.dat"):
-  global vector_save
   try:
     datei = open(filename,"r")
   except IOError as e:
@@ -140,7 +136,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
             bits_count += 1
             start_time = time.clock()
-            matrix += calc_the_matrix(s_index, z_index)
+            matrix += calc_the_matrix(s_index, z_index, vector_save)
             end_time = time.clock()
             took_time = end_time - start_time
             time_count += 1
