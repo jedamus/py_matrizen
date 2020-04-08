@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: matrizen 1.1\n"
 "Report-Msgid-Bugs-To: Leander Jedamus <ljedamus@web.de>\n"
-"POT-Creation-Date: 2020-04-08 15:16+0200\n"
-"PO-Revision-Date: 2020-04-08 15:16+0200\n"
+"POT-Creation-Date: 2020-04-08 17:17+0200\n"
+"PO-Revision-Date: 2020-04-08 17:17+0200\n"
 "Last-Translator: Leander Jedamus <ljedamus@web.de>\n"
 "Language-Team: Leander Jedamus <ljedamus@web.de>\n"
 "Language: de en\n"
@@ -49,17 +49,17 @@ msgstr ""
 msgid "input from \"{filename:s}\"."
 msgstr ""
 
-#: main.py:110
+#: main.py:111
 msgid "Start:"
 msgstr ""
 
-#: main.py:114
+#: main.py:116
 msgid "End:  "
 msgstr ""
 
-#: main.py:115
+#: main.py:119
 #, python-brace-format
-msgid "That are {delta:d} seconds."
+msgid "That are {seconds:d} seconds."
 msgstr ""
 
 #: matrix_aus_datei.py:74
