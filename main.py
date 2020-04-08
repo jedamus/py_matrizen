@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 08. April 2020 15:17 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 16:45 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
@@ -16,6 +17,8 @@ import logging
 import logging.config
 import atexit
 import time
+import datetime
+import locale
 import re
 import matrix_aus_datei as datei
 import matrix_interaktiv as interaktiv
@@ -34,20 +37,6 @@ logging.logProcesses=0
 logging.config.fileConfig("logging.conf")
 logger = logging.getLogger(__name__)
 
-"""
-file_handler = logging.FileHandler(log_path_and_filename)
-stdout_handler = logging.StreamHandler(sys.stdout)
-formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s",
-                              "%d.%m.%Y %H:%M:%S")
-file_handler.setFormatter(formatter)
-stdout_handler.setFormatter(formatter)
-logger = logging.getLogger()
-logger.addHandler(file_handler)
-logger.addHandler(stdout_handler)
-#logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
-"""
-
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
   trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
@@ -61,6 +50,7 @@ except IOError:
     return s
 
 logger = logging.getLogger(__name__)
+time_str = _("%A, the %d. %B %Y at %H:%M:%S.")
 
 def matrix_ausgeben(matrix, matname):
   if matname != "":
@@ -85,6 +75,7 @@ def matrix_ausgeben(matrix, matname):
       exit(-1)
 
 if __name__ == '__main__':
+  locale.setlocale(locale.LC_ALL, "")
   parser = ArgumentParser(description = _("Create a matrix from input and output bits"))
   parser.add_argument("-f","--file", dest="filename", default="",
                       help=_("select file to read"))
@@ -116,7 +107,12 @@ if __name__ == '__main__':
     else:
       if logger.isEnabledFor(logging.DEBUG):
         logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
+      print(_("Start:"),time.strftime(time_str))
+      start = datetime.datetime.today()
       matrix = datei.matrix_aus_datei(filename)
+      end = datetime.datetime.today()
+      print(_("End:  "),time.strftime(time_str))
+      print(_("That are {delta:d} seconds.").format(delta=(end-start).total_seconds()))
       matrix_ausgeben(matrix, matname)
       print("matrix = {matrix:s}".format(matrix=str(matrix)))
 
