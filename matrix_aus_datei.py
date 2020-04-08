@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 08. April 2020 09:05 von Leander Jedamus
 # modifiziert Dienstag, 07. April 2020 17:34 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 23:25 von Leander Jedamus
@@ -39,6 +40,8 @@ except IOError:
 vector_save = None
 matrix = None
 worker_count = 4
+time_count = 0
+time_sum = 0.0
 
 class calculate(threading.Thread):
   Lock = threading.Lock()
@@ -46,13 +49,30 @@ class calculate(threading.Thread):
 
   def run(self):
     global matrix
+    global time_sum
+    global time_count
+
+    is_debug = logger.isEnabledFor(logging.DEBUG)
 
     while True:
       (s_index, z_index) = calculate.Queue.get()
+
+      start_time = time.clock()
+
       temp_matrix = self.calc_the_matrix(s_index, z_index)
 
       calculate.Lock.acquire()
+
       matrix += temp_matrix
+
+      end_time = time.clock()
+      took_time = end_time - start_time
+      time_count += 1
+      time_sum += took_time
+
+      if is_debug:
+        logger.debug(_("Vector- and Matrix-operations took {time:1.2f} seconds").format(time=took_time))
+
       calculate.Lock.release()
 
       calculate.Queue.task_done()
@@ -75,6 +95,11 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
   global matrix
   global vector_save
   global worker_count
+  global time_sum
+  global time_count
+
+  time_sum = 0.0
+  time_count = 0
 
   try:
     datei = open(filename,"r")
@@ -84,8 +109,6 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
   debug_enabled = logger.isEnabledFor(logging.DEBUG)
   error_enabled = logger.isEnabledFor(logging.ERROR)
-  time_count = 0
-  time_sum = 0.0
 
   reg_comment = re.compile(r"^#.*")
   reg_empty = re.compile(r"^$")
@@ -130,11 +153,15 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
     else:
       if is_first:
         is_first = False
+
         power = 2**n
+
         matrix = np.zeros( (power,power), dtype=np.int8 )
         vector_save = np.zeros( (1,power), dtype=np.int8 )
+
         for i in range(power):
           has_bits.append(False)
+
         worker_threads = [calculate() for i in range(worker_count)]
         i = 1
         for thread in worker_threads:
@@ -173,19 +200,9 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             has_bits[s_index] = True
 
             bits_count += 1
-            #start_time = time.clock()
-            ##calculate.Lock.acquire()
             logger.debug("Before Queueing.")
             calculate.Queue.put((s_index, z_index))
             logger.debug("After Queueing.")
-            #matrix += calc_the_matrix(s_index, z_index, vector_save)
-            ##calculate.Lock.release()
-            #end_time = time.clock()
-            #took_time = end_time - start_time
-            #time_count += 1
-            #time_sum += took_time
-
-            #logger.info(_("Vector- and Matrix-operations took {time:1.2f} seconds").format(time=took_time))
             logger.info("bits_count = {bits_count:d}".format(bits_count=bits_count))
       else:
         logger.fatal(_("Line {line_no:d} doesn't match").format(line_no=line_no))
@@ -207,7 +224,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
 
   calculate.Queue.join()
   logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
-  #logger.info(_("Average time vector- and matrix-operations took {time:1.4f} seconds").format(time=time_sum/time_count))
+  logger.info(_("Average time vector- and matrix-operations took {time:1.4f} seconds").format(time=time_sum/time_count))
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
