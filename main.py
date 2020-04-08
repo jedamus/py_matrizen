@@ -2,7 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
-# modifiziert Mittwoch, 08. April 2020 15:17 von Leander Jedamus
+# modifiziert Mittwoch, 08. April 2020 17:17 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 16:45 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:39 von Leander Jedamus
@@ -107,12 +107,17 @@ if __name__ == '__main__':
     else:
       if logger.isEnabledFor(logging.DEBUG):
         logger.debug(_("input from \"{filename:s}\".".format(filename=filename)))
-      print(_("Start:"),time.strftime(time_str))
       start = datetime.datetime.today()
+      print(_("Start:"),start.strftime(time_str))
+
       matrix = datei.matrix_aus_datei(filename)
+
       end = datetime.datetime.today()
-      print(_("End:  "),time.strftime(time_str))
-      print(_("That are {delta:d} seconds.").format(delta=(end-start).total_seconds()))
+      print(_("End:  "),end.strftime(time_str))
+
+      seconds = int((end-start).total_seconds() + 0.5)
+      print(_("That are {seconds:d} seconds.").format(seconds=seconds))
+
       matrix_ausgeben(matrix, matname)
       print("matrix = {matrix:s}".format(matrix=str(matrix)))
 
