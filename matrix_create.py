@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 31. März 2020 20:31 (C) 2020 von Leander Jedamus
+# modifiziert Samstag, 11. April 2020 15:16 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:46 von Leander Jedamus
 
 from __future__ import print_function
@@ -20,7 +21,7 @@ def matrix_create(n=2,filename="matrix_test.dat"):
 
     datei.write("\n")
     datei.write("# bits:\n")
-    bits = matrizen.bits_and_vector(n)
+    bits = matrizen.get_bits(n)
 
     power = 2**n
 

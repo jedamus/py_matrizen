@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 10. März 2020 10:55 (C) 2020 von Leander Jedamus
+# modifiziert Samstag, 11. April 2020 15:16 von Leander Jedamus
 # modifiziert Donnerstag, 09. April 2020 06:56 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 19:58 von Leander Jedamus
 # modifiziert Freitag, 20. März 2020 09:43 von Leander Jedamus
@@ -21,6 +22,7 @@ import sys
 import os
 import gettext
 import numpy as np
+import matrizen
 
 if int(sys.version_info.major) < 3:
   my_input = raw_input
@@ -40,24 +42,6 @@ except IOError:
   logger.error("Fehler in gettext")
   def _(s):
     return s
-
-def get_bits(n):
-  power = 2**n
-  bits = []
-  for i in range(power):
-    bits.append("")
-
-  for i in range(power):
-    if logger.isEnabledFor(logging.DEBUG):
-      logger.debug("i = {i:s}".format(i=str(i+1)))
-    for j in range(n):
-      if (i & 2**(n-j-1) != 0):
-        bits[i] += "1"
-      else:
-        bits[i] += "0"
-    if logger.isEnabledFor(logging.DEBUG):
-      logger.debug("bits[{i:d}] = {bits:s}".format(i=i,bits=bits[i]))
-  return(bits)
 
 def input_number(n1,n2,output):
   while(True):
@@ -96,7 +80,7 @@ def matrix_interaktiv():
   debug_enabled = logger.isEnabledFor(logging.DEBUG)
   n = input_number(1,16,"n = ")
 
-  bits = get_bits(n)
+  bits = matrizen.get_bits(n)
 
   power = 2**n
   matrix = np.zeros( (power,power), dtype=np.int8 )
