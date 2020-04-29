@@ -2,12 +2,18 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 11. April 2020 15:17 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 29. April 2020 12:51 von Leander Jedamus
 # modifiziert Samstag, 11. April 2020 15:18 von Leander Jedamus
 
 from __future__ import print_function
+import os
+import inspect
 import logging
 
 logger = logging.getLogger(__name__)
+
+scriptpath = os.path.realpath(os.path.abspath(os.path.split( \
+               inspect.getfile(inspect.currentframe()))[0]))
 
 def get_bits(n):
   power = 2**n

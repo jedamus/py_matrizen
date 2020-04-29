@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 29. April 2020 12:50 von Leander Jedamus
 # modifiziert Mittwoch, 08. April 2020 09:05 von Leander Jedamus
 # modifiziert Dienstag, 07. April 2020 17:34 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 15:11 von Leander Jedamus
@@ -16,6 +17,7 @@
 from __future__ import print_function
 import re
 import os
+import inspect
 import sys
 import time
 import copy
@@ -27,7 +29,8 @@ import queue
 
 logger = logging.getLogger(__name__)
 
-scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
+scriptpath = os.path.realpath(os.path.abspath(os.path.split( \
+               inspect.getfile(inspect.currentframe()))[0]))
 try:
   trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
 # trans.install(unicode=True)

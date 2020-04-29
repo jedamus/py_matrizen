@@ -2,14 +2,20 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Dienstag, 31. März 2020 20:31 (C) 2020 von Leander Jedamus
+# modifiziert Mittwoch, 29. April 2020 12:50 von Leander Jedamus
 # modifiziert Samstag, 11. April 2020 15:16 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:46 von Leander Jedamus
 
 from __future__ import print_function
 import logging
+import os
+import inspect
 import matrizen
 
 logger = logging.getLogger(__name__)
+
+scriptpath = os.path.realpath(os.path.abspath(os.path.split( \
+               inspect.getfile(inspect.currentframe()))[0]))
 
 def matrix_create(n=2,filename="matrix_test.dat"):
   try:
