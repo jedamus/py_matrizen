@@ -2,6 +2,8 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Freitag, 05. Juni 2020 13:48 von Leander Jedamus
+# modifiziert Donnerstag, 04. Juni 2020 08:04 von Leander Jedamus
 # modifiziert Mittwoch, 29. April 2020 12:50 von Leander Jedamus
 # modifiziert Mittwoch, 08. April 2020 09:05 von Leander Jedamus
 # modifiziert Dienstag, 07. April 2020 17:34 von Leander Jedamus
@@ -24,6 +26,7 @@ import copy
 import logging
 import gettext
 import numpy as np
+from numpy.linalg import inv
 import threading
 import queue
 
@@ -116,9 +119,9 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
   reg_comment = re.compile(r"^#.*")
   reg_empty = re.compile(r"^$")
   reg_n = re.compile(r"n = (\d+)")
-  reg_bits = re.compile(r"([01]+) > ([01]+)")
-  reg_lbits = re.compile(r"([01]+) [01]+")
-  reg_rbits = re.compile(r"[01]+ ([01]+)")
+  reg_bits = re.compile(r"([01]+) > ([01xX]+)")
+  reg_lbits = re.compile(r"([01]+) [01xX]+")
+  reg_rbits = re.compile(r"[01]+ ([01xX]+)")
 
   has_n = False
   has_bits = []
@@ -185,6 +188,13 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
           logger.debug("lbits = " + lbits)
           logger.debug("rbits = " + rbits)
 
+        ## new:
+        for i in range(len(rbits)):
+          if (rbits[i] == "x"):
+            rbits = rbits.replace("x","0")
+          elif (rbits[i] == "X"):
+            rbits = rbits.replace("X","0")
+
         # lbits und rbits suchen und index merken
         if (len(lbits) != n) | (len(rbits) != n):
           logger.fatal(_("bits not of length {power:d}").format(power=power))
@@ -203,6 +213,7 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
             has_bits[s_index] = True
 
             bits_count += 1
+
             logger.debug("Before Queueing.")
             calculate.Queue.put((s_index, z_index))
             logger.debug("After Queueing.")
@@ -228,6 +239,11 @@ def matrix_aus_datei(filename="matrix_cnot.dat"):
   calculate.Queue.join()
   logger.debug("matrix = {matrix:s}".format(matrix=str(matrix)))
   logger.info(_("Average time vector- and matrix-operations took {time:1.4f} seconds").format(time=time_sum/time_count))
+  try:
+    m2 = inv(matrix)
+    print("inv(matrix) = \n",m2)
+  except np.linalg.LinAlgError:
+    print("Matrix ist singulär!")
   return(matrix)
 
 # vim:ai sw=2 sts=4 expandtab
