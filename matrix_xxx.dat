@@ -1,0 +1,12 @@
+# Anzahl Zeilen und Spalten
+n = 3
+
+#
+000 > xx0
+001 > xx0     
+010 > xx1
+011 > xx1
+100 > xx1
+101 > xx1
+110 > xx0
+111 > xx0
