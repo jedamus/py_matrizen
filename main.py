@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 12:26 (C) 2020 von Leander Jedamus
+# modifiziert Donnerstag, 19. November 2020 09:14 von Leander Jedamus
 # modifiziert Mittwoch, 08. April 2020 17:47 von Leander Jedamus
 # modifiziert Mittwoch, 01. April 2020 16:45 von Leander Jedamus
 # modifiziert Dienstag, 31. März 2020 20:51 von Leander Jedamus
@@ -39,7 +40,7 @@ logger = logging.getLogger(__name__)
 
 scriptpath = os.path.abspath(os.path.dirname(sys.argv[0]))
 try:
-  trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
+  trans = gettext.translation("matrizen",os.path.join(scriptpath, "locale"))
   if int(sys.version_info.major) < 3:
     trans.install(unicode=True)
   else:

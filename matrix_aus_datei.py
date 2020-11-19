@@ -2,6 +2,7 @@
 # coding=utf-8 -*- python -*-
 
 # erzeugt Samstag, 14. März 2020 07:37 (C) 2020 von Leander Jedamus
+# modifiziert Donnerstag, 19. November 2020 09:14 von Leander Jedamus
 # modifiziert Freitag, 05. Juni 2020 13:48 von Leander Jedamus
 # modifiziert Donnerstag, 04. Juni 2020 08:04 von Leander Jedamus
 # modifiziert Mittwoch, 29. April 2020 12:50 von Leander Jedamus
@@ -35,7 +36,7 @@ logger = logging.getLogger(__name__)
 scriptpath = os.path.realpath(os.path.abspath(os.path.split( \
                inspect.getfile(inspect.currentframe()))[0]))
 try:
-  trans = gettext.translation("matrizen",os.path.join(scriptpath, "translate"))
+  trans = gettext.translation("matrizen",os.path.join(scriptpath, "locale"))
 # trans.install(unicode=True)
   trans.install()
 except IOError:
